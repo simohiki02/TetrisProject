@@ -1,0 +1,18 @@
+PACCHETTI UDP
+
+[Pacchetto game]
+mittente;destinatario;stato gioco;righe risolte/da mandare;malus
+
+[Pacchetto connessione]
+mittente;destinatario;tipo di connessione
+
+PEER
+
+-Gestire il gioco tetris (compreso grafica)
+-Gestire punti
+-Inviare e ricevere i pacchetti
+-Aggiornare di volta in volta lo stato del gioco
+
+// cose aggiuntive, debuff all'avversario
+  -> + velocità ai pezzi dell'avversario 
+  -> riduzione attacco
