@@ -8,9 +8,9 @@ namespace TetrisGame
 {
     class Pacchetto
     {
-        private int stato, righe, malus; //stato del gioco, righe risolte, malus
-        private String nome; //nome del giocatore
-        private char connessione; //stato connessione
+        public int stato, righe, malus; //stato del gioco, righe risolte, malus
+        public  String nome; //nome del giocatore
+        public char connessione; //stato connessione
         
         public Pacchetto(String csv) //arriva un pacchetto, lo devo splittare
         {
