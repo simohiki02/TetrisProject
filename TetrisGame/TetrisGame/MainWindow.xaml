@@ -5,8 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TetrisGame"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        ResizeMode="CanMinimize"
+        Title="MainWindow" Height="514.8" Width="880.4">
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="GraficaTetris/TetrisLogo.jpg"/>
+        </Grid.Background>
+        <Label Content="TETRIS GAME" HorizontalAlignment="Center" Height="73" VerticalAlignment="Top" Width="342" FontFamily="Stencil" FontSize="50" BorderThickness="4" Margin="273,46,258.6,0" Foreground="White" Background="#FF0008B0">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="0"/>
+            </Label.Effect>
+        </Label>
+        <Label x:Name="lbl" Content="Nome giocatore:" HorizontalAlignment="Center" Height="59" VerticalAlignment="Top" Width="287" FontSize="40" FontFamily="Impact" FontWeight="Bold" Margin="108,185,478.6,0" Foreground="#FF00061F" Background="White">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Button Content="CONNETTI" HorizontalAlignment="Left" Height="75" Margin="273,315,0,0" VerticalAlignment="Top" Width="342" FontSize="40" FontFamily="Cooper Black" Background="#FFFF0077" Foreground="White" FontStyle="Italic">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <TextBox HorizontalAlignment="Left" Height="59" Margin="415,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="377" FontSize="45" FontFamily="Franklin Gothic Heavy"/>
     </Grid>
 </Window>

@@ -13,7 +13,7 @@ namespace TetrisGame
         private DatiCondivisi dati;
         private IPEndPoint riceveEP;
         private byte[] dataReceived; //byte per salvare i dati ricevuti
-        private String risposta;
+        private string risposta;
         private UdpClient client;
 
         public Server(DatiCondivisi dati) 
@@ -27,7 +27,7 @@ namespace TetrisGame
 
         public void Ricevi()
         {
-            while(true)
+            while(Pacchetto.connessione != 'c') //ricevi fino a quando non si chiude la connessione
             {
                 dataReceived = client.Receive(ref riceveEP);
                 risposta = Encoding.ASCII.GetString(dataReceived);

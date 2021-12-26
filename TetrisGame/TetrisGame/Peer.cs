@@ -11,17 +11,20 @@ namespace TetrisGame
     {
         DatiCondivisi dati; //inizializzo i dati condivisi
         Server server; //inizializzo il server
-
-        public Peer()
+        Elabora elabora; //inizializzo il thread per l'elaborazione dati
+        public Peer(DatiCondivisi dati)
         {
-            dati = new DatiCondivisi();
+            this.dati = dati;
             server = new Server(dati);
+            elabora = new Elabora(dati);
         }
 
         public void StartThread()
         {
-            Thread t = new Thread(new ThreadStart(server.Ricevi));
-            t.Start();
+            Thread threadServer = new Thread(new ThreadStart(server.Ricevi));
+            threadServer.Start();
+            Thread threadElabora = new Thread(new ThreadStart(elabora.Esamina));
+            threadElabora.Start();
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.VisualBasic;
 
 namespace TetrisGame
 {
@@ -21,11 +22,29 @@ namespace TetrisGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        static List<string> listaDati = new List<string>(); //lista dei dati da inviare
+        static DatiCondivisi dati = new DatiCondivisi(); //inizializzo i dati condivisi
         public MainWindow()
         {
             InitializeComponent();
-            Peer p = new Peer(); //costruttore dei Thread
+            Peer p = new Peer(dati); //costruttore dei Thread
             p.StartThread(); //start dei thread
+        }
+
+        public static void MessConnessione(string nome)
+        {
+            string mess = "Accettare la connessione da " + nome;
+            MessageBoxResult risposta = MessageBox.Show(mess, "Connessione", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if(risposta == MessageBoxResult.Yes)
+            {
+                string name = Interaction.InputBox("Inserisci il tuo nome");
+                Pacchetto p = new Pacchetto(new string[] { "y", nome }); //creo il pacchetto
+                dati.addDaInviare(p); //lo aggiungo alla lista dei pacchetti da inviare
+            }
+            else
+            {
+                
+            }
         }
     }
 }
