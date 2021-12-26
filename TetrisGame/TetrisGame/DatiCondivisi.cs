@@ -10,6 +10,11 @@ namespace TetrisGame
     {
         private List<Pacchetto> DaElaborare;
 
+        public DatiCondivisi()
+        {
+            DaElaborare = new List<Pacchetto>();
+        }
+
         public void addDaElaborare(Pacchetto p) //aggiungo il pacchetto da elaborare
         {
             DaElaborare.Add(p);
