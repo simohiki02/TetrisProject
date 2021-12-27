@@ -33,13 +33,13 @@ namespace TetrisGame
 
         public static void MessConnessione(string nome)
         {
-            string mess = "Accettare la connessione da " + nome;
+            string mess = "Accettare la connessione da " + nome + "?";
             MessageBoxResult risposta = MessageBox.Show(mess, "Connessione", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if(risposta == MessageBoxResult.Yes)
+            if(risposta == MessageBoxResult.Yes) //accetto la richiesta
             {
                 string name = Interaction.InputBox("Inserisci il tuo nome");
-                Pacchetto p = new Pacchetto(new string[] { "y", nome }); //creo il pacchetto
-                dati.addDaInviare(p); //lo aggiungo alla lista dei pacchetti da inviare
+                string pacchetto = "y;" + name; 
+                dati.addDaInviare(pacchetto); //lo aggiungo alla lista dei pacchetti da inviare
             }
             else
             {

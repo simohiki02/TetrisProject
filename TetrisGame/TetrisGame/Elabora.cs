@@ -26,8 +26,17 @@ namespace TetrisGame
                     }
                     else //pacchetto connessione
                     {
-                        if (Pacchetto.connessione == 'a') //se arriva una richiesta di connessione
-                            MainWindow.MessConnessione(p.nome);
+                        char connection = Pacchetto.connessione; //controllo lo stato della connessione
+                        switch(connection)
+                        {
+                            case 'a': //richiesta di connessione
+                                MainWindow.MessConnessione(p.nome); //visualizzo il po-up con il nome del mittente
+                                break;
+                            case 'y': //ho inviato la richiesta, il destinatario ha accettato
+                                Game game = new Game();
+                                game.ShowDialog(); //apro la finestra del gioco
+                                break;
+                        }
                     }
                 }
             }

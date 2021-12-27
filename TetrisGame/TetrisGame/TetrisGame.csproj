@@ -56,12 +56,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Game.xaml.cs">
+      <DependentUpon>Game.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GraficaTetris\I.cs" />
     <Compile Include="GraficaTetris\L.cs" />
     <Compile Include="GraficaTetris\Q.cs" />
     <Compile Include="GraficaTetris\S.cs" />
     <Compile Include="GraficaTetris\T.cs" />
     <Compile Include="Server.cs" />
+    <Page Include="Game.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -28,10 +28,5 @@ namespace TetrisGame
                 nome = dati[1]; //nome 
             }
         }
-
-        public Pacchetto(string[] dati) //costruzione pacchetto da inviare
-        {
-
-        }
     }
 }
