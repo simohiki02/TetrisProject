@@ -30,6 +30,7 @@ namespace TetrisGame
             while(Pacchetto.connessione != 'c') //ricevi fino a quando non si chiude la connessione
             {
                 dataReceived = client.Receive(ref riceveEP);
+                Client.address = riceveEP.Address.ToString(); //salvo l'indirizzo IP del destinatario
                 risposta = Encoding.ASCII.GetString(dataReceived);
                 Pacchetto p = new Pacchetto(risposta); //creo il pacchetto
                 dati.addDaElaborare(p); //lo aggiungo alla lista da elaborare 

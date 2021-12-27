@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TetrisGame
 {
@@ -13,6 +14,7 @@ namespace TetrisGame
         {
             this.dati = dati;
         }
+
         public void Esamina()
         {
             while(Pacchetto.connessione != 'c')
@@ -33,8 +35,10 @@ namespace TetrisGame
                                 MainWindow.MessConnessione(p.nome); //visualizzo il po-up con il nome del mittente
                                 break;
                             case 'y': //ho inviato la richiesta, il destinatario ha accettato
-                                Game game = new Game();
-                                game.ShowDialog(); //apro la finestra del gioco
+                                MainWindow.StartGame();
+                                break;
+                            case 'n': //ho inviato la richiesta, il destinatario non ha accettato
+                                MainWindow.MessNoConnessione();
                                 break;
                         }
                     }

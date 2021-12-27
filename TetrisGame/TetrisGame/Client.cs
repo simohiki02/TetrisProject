@@ -11,6 +11,7 @@ namespace TetrisGame
     {
         private UdpClient client;
         private DatiCondivisi dati;
+        public static string address; //indirizzo del destinatario
         public Client(DatiCondivisi dati)
         {
             client = new UdpClient(12346);
