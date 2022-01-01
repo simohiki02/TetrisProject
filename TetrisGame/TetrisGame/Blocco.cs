@@ -11,7 +11,7 @@ namespace TetrisGame
     public class Blocco
     {
         //array contenente i pezzi
-        string[] arrayTetrominos = { "", "pezzoQ", "pezzoI", "pezzoT", "pezzoS", "pezzoZ", "pezzoJ", "pezzoL" };
+        //string[] arrayTetrominos = { "", "pezzoQ", "pezzoI", "pezzoT", "pezzoS", "pezzoZ", "pezzoJ", "pezzoL" };
 
         //array contenente le rotazioni dei pezzi
         int[] posizioni;
