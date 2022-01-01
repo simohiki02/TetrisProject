@@ -10,7 +10,7 @@ namespace TetrisGame.GraficaTetris
 
 
 
-    class I
+    public class I : Blocco
     {
         private static Color coloreI = Colors.Orange;
 

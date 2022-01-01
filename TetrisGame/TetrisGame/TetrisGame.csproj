@@ -66,6 +66,8 @@
     <Compile Include="GraficaTetris\S.cs" />
     <Compile Include="GraficaTetris\T.cs" />
     <Compile Include="GraficaTetris\Z.cs" />
+    <Compile Include="Grid.cs" />
+    <Compile Include="ListaBlocchi.cs" />
     <Compile Include="Server.cs" />
     <Page Include="Game.xaml">
       <SubType>Designer</SubType>

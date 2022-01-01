@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace TetrisGame.GraficaTetris
 {
-    class Z
+    public class Z: Blocco
     {
         private static Color coloreZ = Colors.DeepSkyBlue;
 

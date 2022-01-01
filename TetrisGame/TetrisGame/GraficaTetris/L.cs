@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace TetrisGame.GraficaTetris
 {
-    class L
+    public class L: Blocco
     {
         private static Color coloreL = Colors.Red;
 

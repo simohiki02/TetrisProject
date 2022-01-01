@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace TetrisGame
 {
-    class Blocco
+    public class Blocco
     {
         //array contenente i pezzi
         string[] arrayTetrominos = { "", "pezzoQ", "pezzoI", "pezzoT", "pezzoS", "pezzoZ", "pezzoJ", "pezzoL" };
