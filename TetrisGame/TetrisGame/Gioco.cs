@@ -20,7 +20,7 @@ namespace TetrisGame
 
         public void setBlocco()
         {
-            bloccoCorrente.reset();
+            bloccoCorrente.Reset();
         }
 
         public Grid getCampoGioco()
@@ -43,7 +43,7 @@ namespace TetrisGame
         //metodo che verifica se il blocco è in una posizione valida
         private bool bloccoValido()
         {
-            foreach (Cella c in bloccoCorrente.posizioneBlocchi())
+            foreach (Cella c in bloccoCorrente.PosizioneBlocchi())
             {
                 if (!campoGioco.IsEmpty(c.riga, c.colonna))
                 {
@@ -58,19 +58,19 @@ namespace TetrisGame
 
         public void muoviSinistra()
         {
-            bloccoCorrente.muoviPezzo(0, -1);
+            bloccoCorrente.MuoviPezzo(0, -1);
             if (!bloccoValido())
             {
-                bloccoCorrente.muoviPezzo(0, -1);
+                bloccoCorrente.MuoviPezzo(0, -1);
             }
         }
 
         public void muoviDestra()
         {
-            bloccoCorrente.muoviPezzo(0, 1);
+            bloccoCorrente.MuoviPezzo(0, 1);
             if (!bloccoValido())
             {
-                bloccoCorrente.muoviPezzo(0, 1);
+                bloccoCorrente.MuoviPezzo(0, 1);
             }
         }
 
@@ -82,10 +82,10 @@ namespace TetrisGame
 
         public void muoviSotto()
         {
-            bloccoCorrente.muoviPezzo(1, 0);
+            bloccoCorrente.MuoviPezzo(1, 0);
             if (!bloccoValido())
             {
-                bloccoCorrente.muoviPezzo(-1, 0);
+                bloccoCorrente.MuoviPezzo(-1, 0);
             }
         }
     }

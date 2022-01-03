@@ -5,64 +5,74 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-
 namespace TetrisGame
 {
+    //classe madre da cui erediteranno i blocchi
     public class Blocco
     {
-        //array contenente i pezzi
-        //string[] arrayTetrominos = { "", "pezzoQ", "pezzoI", "pezzoT", "pezzoS", "pezzoZ", "pezzoJ", "pezzoL" };
+        public int id; //inizialmente un id per distinguere i vari blocchi
+        public Cella[][] blocchi; //posizione dei blocchi nei 4 stati [riga][colonna]
+        public Cella posizioneIniziale; //posizione iniziale del blocco all'interno della grid
 
-        //array contenente le rotazioni dei pezzi
-        private Cella[][] blocchi;
-        public Cella posizioneIniziale;
+        //valori fondamentali del blocco
+        private int statoRotazione; //stato rotazione del blocco
+        private Cella posizione; //posizione corrente del blocco
 
-        //array contenente i colori dei pezzi
-        //Color[] shapeColor = { coloreQ,coloreI,coloreT,coloreS,coloreZ,coloreJ,coloreL};
-
-        //id per distinguere i vari blocchi
-        public int id;
-
-        //valori per determinare posizioni dei pezzi
-        private int statoRotazione;
-        private Cella posizione;
-
-        //costruttore da definire classe per posizione 
         public Blocco()
         {
+            //nel costruttore assegnamo la posizione iniziale alla posizione corrente come prima posizione del blocco appunto
             posizione = new Cella(posizioneIniziale.riga, posizioneIniziale.colonna);
         }
 
         //metodo che ritorna le posizioni occupate dai blocchi
-        public Cella posizioneBlocchi()
+        //uso un enum perchè ho bisogno solo di leggere dalla raccolta
+        public IEnumerable<Cella> PosizioneBlocchi() //restituisce un enum
         {
-            foreach (Cella c in blocchi[statoRotazione])
+            foreach (Cella c in blocchi[statoRotazione]) //posizioni dei blocchi nello stato di rotazione corrente
             {
-
-                return new Cella(c.riga + posizione.riga, c.colonna + posizione.colonna);
+                //restituisco una nuova cella sommando le righe e le colonne della grid per arrivare alla matrice del blocco nella grid
+                //yield: restituisce un'espressione alla volta e mantiene l'indice nell'iterazione per ripartire da li quando viene richiamato
+                yield return new Cella(c.riga + posizione.riga, c.colonna + posizione.colonna);
             }
         }
 
-        //metodo per resettare posizioni dei blocchi
-        public void reset()
-        {
-            statoRotazione = 0;
-            posizione.riga = posizioneIniziale.riga;
-            posizione.colonna = posizioneIniziale.colonna;
-
-        }
-
-        //metodo per rotazione dei pezzi
-        public void ruotaPezzo()
-        {
-            statoRotazione = statoRotazione + 1;
-        }
-
         //metodo per muovere un pezzo di un numero di righe e colonne
-        public void muoviPezzo(int righe, int colonne)
+        public void MuoviPezzo(int righe, int colonne)
         {
-            posizione.riga += righe;
-            posizione.colonna += colonne;
+            posizione.riga += righe; //alla riga corrente del blocco sommo il numero di righe passate 
+            posizione.colonna += colonne; //stessa cosa per le colonne
+        }
+
+        //rotazione pezzo in senso orario
+        public void RuotaPezzoSensoOrario()
+        {
+            //passo allo stato di rotazione successivo --> (statoRotazione + 1)
+            //e dividendolo per il numero degli stati dei blocchi quindi 4 
+            //ottengo il resto che sarà sempre compreso tra 0 e 3
+            //in questo modo se sono a uno stato di rotazione 4 tornerò al primo stato, 5 al secondo e cosi via...
+            statoRotazione = (statoRotazione + 1) % blocchi.Length;
+        }
+
+        //rotazione pezzo in senso anti orario
+        public void RuotaPezzoSensoAntiOrario()
+        {
+            if(statoRotazione == 0) //se sono al primo stato devo andare all'ultimo
+            {
+                statoRotazione = blocchi.Length - 1; //quindi assegno alla posizione corrente l'ultimo stato del blocco
+            }
+            else //se sono in un qualcunque altro stato
+            {
+                statoRotazione--; //vado a quello prima decrementando
+            }
+        }
+
+        //metodo per resettare la posizione dei blocchi
+        public void Reset()
+        {
+            //riporto la posizione del blocco allo stato iniziale
+            posizione.riga = posizioneIniziale.riga; 
+            posizione.colonna = posizioneIniziale.colonna;
+            statoRotazione = 0; //riporto il blocco successivo al primo stato di rotazione quindi allo stato 0
         }
     }
 }
