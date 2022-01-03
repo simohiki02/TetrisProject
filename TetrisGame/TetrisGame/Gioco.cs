@@ -45,7 +45,7 @@ namespace TetrisGame
         {
             foreach (Cella c in bloccoCorrente.posizioneBlocchi())
             {
-                if (!campoGioco.isEmpty(c.riga, c.colonna))
+                if (!campoGioco.IsEmpty(c.riga, c.colonna))
                 {
                     return false;
                 }

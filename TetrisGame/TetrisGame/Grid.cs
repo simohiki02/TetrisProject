@@ -6,50 +6,37 @@ using System.Threading.Tasks;
 
 namespace TetrisGame
 {
+    //classe che imposta il campo di gioco
     public class Grid
     {
-        //classe che imposta il campo di gioco
-        private int[,] campo { get; set; }
+        private int[,] campo;
 
         public int righe;
         public int colonne;
 
-        public int getRighe()
+        public int GetRighe()
         {
             return righe;
         }
 
-        public int getColonne()
+        public int GetColonne()
         {
             return colonne;
         }
 
+        //costruttore
         public Grid(int righe, int colonne)
         {
             this.righe = righe;
             this.colonne = colonne;
-            campo = new int[righe, colonne];
+            campo = new int[righe, colonne]; //inizializzazione matrice (grid)
         }
 
-        public bool isInside(int r, int c)
-        {
-            bool valida = false;
-            if(r >= 0 && r < righe && c >= 0 && c < colonne)
-            {
-                valida = true;
-                return valida;
-            }
-            else
-            {
-                return valida;
-            }
-
-        }
-
-        public bool isEmpty(int r, int c)
+        //check se una cella della grid è vuota o no
+        public bool IsEmpty(int r, int c)
         {
             bool vuota = false;
-            if(isInside(r,c) && campo[r,c] == 0)
+            if (IsInside(r, c) && campo[r, c] == 0) //check se è all'interno e per essere vuota riga e colonna = 0
             {
                 vuota = true;
                 return vuota;
@@ -60,23 +47,26 @@ namespace TetrisGame
             }
         }
 
-        public bool rigaPiena(int r)
+        public bool IsInside(int r, int c)
         {
-            for(int c = 0; c < colonne; c++)
+            bool valida = false;
+            if(r >= 0 && r < righe && c >= 0 && c < colonne)  
             {
-                if(campo[r, c] == 0)
-                {
-                    return false;
-                }
+                valida = true;
+                return valida;
             }
-            return true;
+            else
+            {
+                return valida;
+            }
         }
 
-        public bool rigaVuota(int r)
+        //check se una riga della grid è vuota
+        public bool RigaVuota(int r)
         {
             for (int c = 0; c < colonne; c++)
             {
-                if (campo[r, c] != 0)
+                if (campo[r, c] != 0) //se riga e colonna != 0 = riga vuota
                 {
                     return false;
                 }
@@ -84,23 +74,54 @@ namespace TetrisGame
             return true;
         }
 
-        public void pulisciRiga(int r)
+        //check se una riga della grid è piena
+        public bool RigaPiena(int r)
+        {
+            for(int c = 0; c < colonne; c++) //scorro le colonne
+            {
+                if(campo[r, c] == 0) //se riga e colonna = 0 = riga piena
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void PulisciRiga(int r)
         {
             for (int c = 0; c < colonne; c++)
             {
                 campo[r, c] = 0;
             }
         }
-        //metodo per spostare di tot righe sotto una riga
-        public void muoviRiga(int r, int numeroRighe)
+
+        //metodo per spostare una riga sotto di tot righe
+        public void MuoviRiga(int r, int numeroRighe) //prendo la riga corrente, e le righe completate
         {
-            
+            for (int c = 0; c < colonne; c++) //per ogni colonna
+            {
+                campo[r + numeroRighe, c] = campo[r, c]; //alla riga corrente sommo quelle completate e assegno i valori di quella corrente
+                campo[r, c] = 0; //svuoto la riga corrente
+            }
         }
 
-        //metodo per pulire tutte le righe della grid
-        public void pulisciRighe()
+        //metodo per controllare le righe della grid
+        public int CheckGrid()
         {
-
+            int righeCompletate = 0; //contatore per le righe completate
+            for (int r = righe - 1; r >= 0; r--) //partiamo dall'ultima riga della grid
+            {
+                if (RigaPiena(r) == true) //se la riga è piena
+                {
+                    PulisciRiga(r); //puliamo la riga
+                    righeCompletate++; //incrementiamo le righe completate
+                }
+                else if (righeCompletate > 0) //se sono > 0
+                {
+                    MuoviRiga(r, righeCompletate); //muoviamo le righe in basso
+                }
+            }
+            return righeCompletate;
         }
     }
 }
