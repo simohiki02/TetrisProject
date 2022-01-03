@@ -56,9 +56,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cella.cs" />
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gioco.cs" />
     <Compile Include="GraficaTetris\I.cs" />
     <Compile Include="GraficaTetris\J.cs" />
     <Compile Include="GraficaTetris\L.cs" />
@@ -120,6 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GraficaTetris\TetrisLogo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GraficaTetris\GrafichePezzi\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

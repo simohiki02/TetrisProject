@@ -94,6 +94,12 @@ namespace TetrisGame
         //metodo per spostare di tot righe sotto una riga
         public void muoviRiga(int r, int numeroRighe)
         {
+            
+        }
+
+        //metodo per pulire tutte le righe della grid
+        public void pulisciRighe()
+        {
 
         }
     }
