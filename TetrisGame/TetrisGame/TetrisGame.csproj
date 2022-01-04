@@ -123,8 +123,24 @@
   <ItemGroup>
     <Resource Include="GraficaTetris\TetrisLogo.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="GraficaTetris\GrafichePezzi\" />
+    <Resource Include="GraficaTetris\GrafichePezzi\Block-Empty.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\Block-I.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\Block-J.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\Block-L.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\Block-Q.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\Block-S.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\Block-T.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\Block-Z.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\TileBlue.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\TileCyan.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\TileEmpty.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\TileGreen.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\TileOrange.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\TilePurple.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\TileRed.png" />
+    <Resource Include="GraficaTetris\GrafichePezzi\TileYellow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

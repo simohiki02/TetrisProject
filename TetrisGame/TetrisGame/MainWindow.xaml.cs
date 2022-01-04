@@ -24,12 +24,16 @@ namespace TetrisGame
     {
         static List<string> listaDati = new List<string>(); //lista dei dati da inviare
         static DatiCondivisi dati = new DatiCondivisi(); //inizializzo i dati condivisi
+        
+
         public MainWindow()
         {
             InitializeComponent();
             Peer p = new Peer(dati); //costruttore dei Thread
             p.StartThread(); //start dei thread
         }
+
+       
 
         public static void MessConnessione(string nome)
         {
