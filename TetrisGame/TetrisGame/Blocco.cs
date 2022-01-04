@@ -11,7 +11,7 @@ namespace TetrisGame
     public class Blocco
     {
         public int id; //inizialmente un id per distinguere i vari blocchi
-        public Cella[][] blocchi; //posizione dei blocchi nei 4 stati [riga][colonna]
+        public Cella[][] pezzi; //posizione dei singoli pezzi dei blocchi nei 4 stati [riga][colonna]
         public Cella posizioneIniziale; //posizione iniziale del blocco all'interno della grid
 
         //valori fondamentali del blocco
@@ -26,9 +26,9 @@ namespace TetrisGame
 
         //metodo che ritorna le posizioni occupate dai blocchi
         //uso un enum perchè ho bisogno solo di leggere dalla raccolta
-        public IEnumerable<Cella> PosizioneBlocchi() //restituisce un enum
+        public IEnumerable<Cella> PosizionePezzi() //restituisce un enum
         {
-            foreach (Cella c in blocchi[statoRotazione]) //posizioni dei blocchi nello stato di rotazione corrente
+            foreach (Cella c in pezzi[statoRotazione]) //posizioni dei blocchi nello stato di rotazione corrente
             {
                 //restituisco una nuova cella sommando le righe e le colonne della grid per arrivare alla matrice del blocco nella grid
                 //yield: restituisce un'espressione alla volta e mantiene l'indice nell'iterazione per ripartire da li quando viene richiamato
@@ -50,7 +50,7 @@ namespace TetrisGame
             //e dividendolo per il numero degli stati dei blocchi quindi 4 
             //ottengo il resto che sarà sempre compreso tra 0 e 3
             //in questo modo se sono a uno stato di rotazione 4 tornerò al primo stato, 5 al secondo e cosi via...
-            statoRotazione = (statoRotazione + 1) % blocchi.Length;
+            statoRotazione = (statoRotazione + 1) % pezzi.Length;
         }
 
         //rotazione pezzo in senso anti orario
@@ -58,7 +58,7 @@ namespace TetrisGame
         {
             if(statoRotazione == 0) //se sono al primo stato devo andare all'ultimo
             {
-                statoRotazione = blocchi.Length - 1; //quindi assegno alla posizione corrente l'ultimo stato del blocco
+                statoRotazione = pezzi.Length - 1; //quindi assegno alla posizione corrente l'ultimo stato del blocco
             }
             else //se sono in un qualcunque altro stato
             {

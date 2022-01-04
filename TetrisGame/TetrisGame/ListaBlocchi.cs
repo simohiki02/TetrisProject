@@ -12,46 +12,39 @@ namespace TetrisGame
         //classe necessaria a scegliere random il blocco successivo
         private Blocco[] blocchi = new Blocco[]
         {
-            new I(),
-            new J(),
-            new L(),
-            new Q(),
-            new S(),
             new T(),
             new Z(),
+            new S(),
+            new J(),
+            new I(),
+            new L(),
+            new Q(),
         };
+        public Blocco prossimoBlocco { get; set; } //property per il blocco successivo
 
-        //oggetto random per prendere il prossimo blocco
+        //oggetto random per prendere un blocco casuale
         private Random random = new Random();
-
-        public Blocco prossimoBlocco = new Blocco();
-
-        public ListaBlocchi()
-        {
-           
-            //costruttore va in posizione random nell array e sceglie un blocco
-            prossimoBlocco = bloccoRandom();
-        }
-
-        private Blocco bloccoRandom()
+        
+        //metodo per prendere un blocco random dal vettore
+        private Blocco BloccoRandom()
         {
             return blocchi[random.Next(blocchi.Length)];
         }
 
-
-        //metodo che aggiorna il prossimo blocco scelto
-        public Blocco aggiornaBlocco()
+        //il costruttore assegna semplicemente il blocco estratto dal vettore
+        public ListaBlocchi()
         {
-            Blocco b = prossimoBlocco;
-
-            do
-            {
-                prossimoBlocco = bloccoRandom();
-            }
-            while (b.id == prossimoBlocco.id);
-
-            return b;
+            prossimoBlocco = BloccoRandom();
         }
 
+        //metodo che aggiorna il prossimo blocco scelto
+        public Blocco AggiornaBlocco()
+        {
+            Blocco b = prossimoBlocco;
+            //il ciclo estrae un blocco il cui id deve essere diverso da quello appena estratto
+            do{ prossimoBlocco = BloccoRandom(); }
+            while (b.id == prossimoBlocco.id);
+            return b;
+        }
     }
 }

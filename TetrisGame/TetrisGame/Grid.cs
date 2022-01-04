@@ -14,6 +14,13 @@ namespace TetrisGame
         public int righe;
         public int colonne;
 
+        //indicizzatore, grazie a questo posso accedere direttamente ai valori tramite l'instanza di un oggetto 
+        public int this[int r, int c]
+        {
+            get => campo[r, c];
+            set => campo[r, c] = value;
+        }
+
         public int GetRighe()
         {
             return righe;
@@ -36,7 +43,7 @@ namespace TetrisGame
         public bool IsEmpty(int r, int c)
         {
             bool vuota = false;
-            if (IsInside(r, c) && campo[r, c] == 0) //check se è all'interno e per essere vuota riga e colonna = 0
+            if (IsInside(r, c) && campo[r, c] == 0) //check se è all'interno della grid e per essere vuota riga e colonna = 0
             {
                 vuota = true;
                 return vuota;
@@ -47,6 +54,7 @@ namespace TetrisGame
             }
         }
 
+        //check per vedere se un pezzo del blocco è all'interno della grid 
         public bool IsInside(int r, int c)
         {
             bool valida = false;
@@ -66,7 +74,8 @@ namespace TetrisGame
         {
             for (int c = 0; c < colonne; c++)
             {
-                if (campo[r, c] != 0) //se riga e colonna != 0 = riga vuota
+                //se almeno una cella è diversa da 0 vuol dire che la riga non è vuota
+                if (campo[r, c] != 0)  
                 {
                     return false;
                 }
@@ -79,7 +88,8 @@ namespace TetrisGame
         {
             for(int c = 0; c < colonne; c++) //scorro le colonne
             {
-                if(campo[r, c] == 0) //se riga e colonna = 0 = riga piena
+                //se almeno una cella è uguale a 0 vuol dire che la riga non è piena
+                if(campo[r, c] == 0) 
                 {
                     return false;
                 }
@@ -106,7 +116,7 @@ namespace TetrisGame
         }
 
         //metodo per controllare le righe della grid
-        public int CheckGrid()
+        public int CheckRigheCompletate()
         {
             int righeCompletate = 0; //contatore per le righe completate
             for (int r = righe - 1; r >= 0; r--) //partiamo dall'ultima riga della grid
