@@ -23,7 +23,7 @@ namespace TetrisGame
         private Image[,] controlloImmagini;
         private Gioco statoGioco = new Gioco();
 
-        private Image[,] setupCanvas(Gioco grid)
+        private Image[,] setupCanvas(Grid grid)
         {
             Image[,] controlloImmagini = new Image[grid.righe, grid.colonne];
             int dimensioniCelle = 25;
@@ -41,7 +41,7 @@ namespace TetrisGame
 
                     Canvas.SetTop(controllerImmagine, (r - 2) * dimensioniCelle);
                     Canvas.SetLeft(controllerImmagine, c * dimensioniCelle);
-                    GameCanvas.Children.Add(controllerImmagine);
+                    CanvasGioco.Children.Add(controllerImmagine);
                     controlloImmagini[r, c] = controllerImmagine;
                 }
             }
@@ -76,12 +76,44 @@ namespace TetrisGame
         public Game()
         {
             InitializeComponent();
-            //controlloImmagini = setupCanvas(statoGioco.campoTetris)
+            controlloImmagini = setupCanvas(statoGioco.campoGioco);
+        }
+
+        private void disegnaCampo(Grid grid)
+        {
+            for(int r = 0; r < grid.righe; r++)
+            {
+                for(int c = 0; c < grid.colonne; c++)
+                {
+                    int id = grid[r, c];
+                    controlloImmagini[r, c].Source = coloriBlocchi[id];
+                }
+            }
+        }
+
+        private void disegnaBlocco(Blocco blocco)
+        {
+            foreach(Cella c in blocco.PosizionePezzi())
+            {
+                controlloImmagini[c.riga, c.colonna].Source = coloriBlocchi[blocco.id];
+            }
+        }
+
+        private void disegnaGioco(Gioco statoGioco)
+        {
+            disegnaCampo(statoGioco.campoGioco);
+            disegnaBlocco(statoGioco.GetBlocco());
+
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
 
+        }
+
+        private void CanvasGioco_Loaded(object sender, RoutedEventArgs e)
+        {
+            disegnaGioco(statoGioco);
         }
     }
 }

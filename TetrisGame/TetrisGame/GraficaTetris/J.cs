@@ -9,17 +9,20 @@ namespace TetrisGame.GraficaTetris
 {
     public class J : Blocco
     {
-        private static Color colorej = Colors.Violet;
+        private Cella[][] blocchi = new Cella[][]
+       {
+           new Cella[]  { new Cella (0,0), new Cella(1,0), new Cella(1,1), new Cella (1,2) },
+           new Cella[]  {new Cella(0,1), new Cella(0,2), new Cella(1,1), new Cella(2,1)},
+           new Cella[]  { new Cella(1,0),new Cella(1,1), new Cella(1,2), new Cella(2,2)},
+           new Cella[]  { new Cella(0,1),new Cella(1,1), new Cella(2,0), new Cella(2,1) }
+       };
 
-        public int[,] pezzoJ = new int[2, 3] { { 1, 0, 0 }, { 1, 1, 1 } };
-        //pezzo j girato di 90°
+        public int id = 2;
+        private Cella posizionePartenza = new Cella(0, 3);
 
-        public int[,] pezzoJ_90 = new int[3, 2] { { 1, 1 }, { 1, 0 }, { 1, 0 } };
-        //pezzo j girato di 180°
-
-        public int[,] pezzoJ_180 = new int[2, 3] { { 1, 1, 1 }, { 0, 0, 1 } };
-        //pezzo j girato di 270°
-
-        public int[,] pezzoJ_270 = new int[3, 2] { { 0, 1 }, { 0, 1 }, { 1, 1 } };
+        public Cella[][] GetPosizioni()
+        {
+            return blocchi;
+        }
     }
 }

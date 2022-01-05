@@ -24,6 +24,25 @@ namespace TetrisGame
             posizione = new Cella(posizioneIniziale.riga, posizioneIniziale.colonna);
         }
 
+        //mi ritorna il vettore dei pezzi
+        public Cella[][] GetPezzi()
+        {
+            return pezzi;
+        }
+
+
+        //mi ritorna id
+        public int GetId()
+        {
+            return id;
+        }
+
+        //mi ritorna la posizione iniziale
+        public Cella GetPosizioneIniziale()
+        {
+            return posizioneIniziale;
+        }
+
         //metodo che ritorna le posizioni occupate dai blocchi
         //uso un enum perchè ho bisogno solo di leggere dalla raccolta
         public IEnumerable<Cella> PosizionePezzi() //restituisce un enum

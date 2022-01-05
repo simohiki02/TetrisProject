@@ -9,17 +9,21 @@ namespace TetrisGame.GraficaTetris
 {
     public class T: Blocco
     {
-        private static Color coloreT = Colors.LightSeaGreen;
+        private Cella[][] blocchi = new Cella[][]
+       {
+           new Cella[]  { new Cella (0,1), new Cella(1,0), new Cella(1,1), new Cella (1,2) },
 
-        public int[,] pezzoT = new int[2, 3] { { 0, 1, 0 }, { 1, 1, 1 } };
-        //pezzo t girato di 90°
+           new Cella[]  {new Cella(0,1), new Cella(1,1), new Cella(1,2), new Cella(2,1)},
+           new Cella[]  { new Cella(1,0),new Cella(1,1), new Cella(1,2), new Cella(2,1)},
+           new Cella[]  { new Cella(0,1),new Cella(1,0), new Cella(1,1), new Cella(2,1) }
+       };
 
-        public int[,] pezzoT_90 = new int[3, 2] { { 1, 0 }, { 1, 1 }, { 1, 0 } };
-        //pezzo t girato di 180°
+        public int id = 6;
+        private Cella posizionePartenza = new Cella(0, 3);
 
-        public int[,] pezzoT_180 = new int[2, 3] { { 1, 1, 1 }, { 0, 1, 0 } };
-        //pezzo t girato di 270°
-
-        public int[,] pezzoT_270 = new int[3, 2] { { 0, 1 }, { 1, 1 }, { 0, 1 } };
+        public Cella[][] GetPosizioni()
+        {
+            return blocchi;
+        }
     }
 }

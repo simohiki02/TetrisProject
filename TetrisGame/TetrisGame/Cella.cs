@@ -11,10 +11,12 @@ namespace TetrisGame
     {
         public int riga { get; set; }
         public int colonna { get; set; }
+
+
         public Cella(int riga, int colonna) //semplice costruttore con riga e colonna della cella
         {
-            this.riga = riga;
-            this.colonna = colonna;
+            riga = riga;
+            colonna = colonna;
         }
     }
 }
