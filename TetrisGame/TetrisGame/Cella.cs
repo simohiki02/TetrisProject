@@ -15,8 +15,8 @@ namespace TetrisGame
 
         public Cella(int riga, int colonna) //semplice costruttore con riga e colonna della cella
         {
-            riga = riga;
-            colonna = colonna;
+            this.riga = riga;
+            this.colonna = colonna;
         }
     }
 }

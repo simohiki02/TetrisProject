@@ -18,7 +18,7 @@ namespace TetrisGame
             new J(),
             new I(),
             new L(),
-            new Q(),
+            new O(),
         };
         public Blocco prossimoBlocco { get; set; } //property per il blocco successivo
 
@@ -42,8 +42,10 @@ namespace TetrisGame
         {
             Blocco b = prossimoBlocco;
             //il ciclo estrae un blocco il cui id deve essere diverso da quello appena estratto
-            do{ prossimoBlocco = BloccoRandom(); }
-            while (b.id == prossimoBlocco.id);
+            do{ 
+                prossimoBlocco = BloccoRandom(); 
+            }
+            while (b.Id == prossimoBlocco.Id);
             return b;
         }
     }

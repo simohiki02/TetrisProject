@@ -46,7 +46,7 @@ namespace TetrisGame
             //ad ogni pezzo del blocco corrente assegno l'id del pezzo corrispondente
             foreach(Cella c in bloccoCorrente.PosizionePezzi())
             {
-                campoGioco[c.riga, c.colonna] = bloccoCorrente.id; 
+                campoGioco[c.riga, c.colonna] = bloccoCorrente.Id; 
             }
             //controlliamo se ci sono righe completate
             campoGioco.CheckRigheCompletate();

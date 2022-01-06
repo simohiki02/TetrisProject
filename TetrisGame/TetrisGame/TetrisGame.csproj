@@ -64,7 +64,7 @@
     <Compile Include="GraficaTetris\I.cs" />
     <Compile Include="GraficaTetris\J.cs" />
     <Compile Include="GraficaTetris\L.cs" />
-    <Compile Include="GraficaTetris\Q.cs" />
+    <Compile Include="GraficaTetris\O.cs" />
     <Compile Include="GraficaTetris\S.cs" />
     <Compile Include="GraficaTetris\T.cs" />
     <Compile Include="GraficaTetris\Z.cs" />

@@ -50,27 +50,27 @@ namespace TetrisGame
 
         private ImageSource[] coloriBlocchi = new ImageSource[]
         {
-            new BitmapImage(new Uri("GrafichePezzi/TileBlue.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/TileCyan.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/TileEmpty.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/TileGreen.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/TileOrange.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/TilePurple.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/TileRed.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/TileYellow.png", UriKind.Relative))
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileBlue.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileCyan.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileEmpty.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileGreen.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileOrange.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TilePurple.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileRed.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileYellow.png", UriKind.Relative))
 
         };
 
         private ImageSource[] immaginiBlocchi = new ImageSource[]
         {
-            new BitmapImage(new Uri("GrafichePezzi/Block-Empty.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/Block-I.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/Block-J.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/Block-L.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/Block-Q.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/Block-S.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/Block-T.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GrafichePezzi/Block-Z.png", UriKind.Relative))
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-Empty.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-I.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-J.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-L.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-Q.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-S.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-T.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-Z.png", UriKind.Relative))
 
         };
         public Game()
@@ -95,7 +95,7 @@ namespace TetrisGame
         {
             foreach(Cella c in blocco.PosizionePezzi())
             {
-                controlloImmagini[c.riga, c.colonna].Source = coloriBlocchi[blocco.id];
+                controlloImmagini[c.riga, c.colonna].Source = coloriBlocchi[blocco.Id];
             }
         }
 

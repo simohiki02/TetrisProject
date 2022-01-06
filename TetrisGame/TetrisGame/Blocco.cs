@@ -8,11 +8,17 @@ using System.Windows.Media;
 namespace TetrisGame
 {
     //classe madre da cui erediteranno i blocchi
-    public class Blocco
+    //la mettiamo come astratta perchè verrà solo usata come classe base per altre classi e non verrò creata un'istanza relativa ad essa
+    public abstract class Blocco
     {
-        public int id; //inizialmente un id per distinguere i vari blocchi
-        public Cella[][] pezzi; //posizione dei singoli pezzi dei blocchi nei 4 stati [riga][colonna]
-        public Cella posizioneIniziale; //posizione iniziale del blocco all'interno della grid
+        /*mettiamo queste tre variabili astratte perchè poi eseguiremo l'override di queste nelle classi dei singoli blocchi
+        che appunto ereditano da questa classe*/
+        //membro pubblico perchè deve essere visto anche dalle classi che non ereditano da questa
+        public abstract int Id { get; } //inizialmente un id per distinguere i vari blocchi
+        
+        //membri protetti perchè devono essere visti solo dalle classi che ereditano da questa
+        protected abstract Cella[][] Pezzi { get; } //posizione dei singoli pezzi dei blocchi nei 4 stati [riga][colonna]
+        protected abstract Cella PosizioneIniziale { get; } //posizione iniziale del blocco all'interno della grid
 
         //valori fondamentali del blocco
         private int statoRotazione; //stato rotazione del blocco
@@ -21,33 +27,20 @@ namespace TetrisGame
         public Blocco()
         {
             //nel costruttore assegnamo la posizione iniziale alla posizione corrente come prima posizione del blocco appunto
-            posizione = new Cella(posizioneIniziale.riga, posizioneIniziale.colonna);
+            posizione = new Cella(PosizioneIniziale.riga, PosizioneIniziale.colonna);
         }
 
         //mi ritorna il vettore dei pezzi
         public Cella[][] GetPezzi()
         {
-            return pezzi;
-        }
-
-
-        //mi ritorna id
-        public int GetId()
-        {
-            return id;
-        }
-
-        //mi ritorna la posizione iniziale
-        public Cella GetPosizioneIniziale()
-        {
-            return posizioneIniziale;
+            return Pezzi;
         }
 
         //metodo che ritorna le posizioni occupate dai blocchi
         //uso un enum perchè ho bisogno solo di leggere dalla raccolta
         public IEnumerable<Cella> PosizionePezzi() //restituisce un enum
         {
-            foreach (Cella c in pezzi[statoRotazione]) //posizioni dei blocchi nello stato di rotazione corrente
+            foreach (Cella c in Pezzi[statoRotazione]) //posizioni dei blocchi nello stato di rotazione corrente
             {
                 //restituisco una nuova cella sommando le righe e le colonne della grid per arrivare alla matrice del blocco nella grid
                 //yield: restituisce un'espressione alla volta e mantiene l'indice nell'iterazione per ripartire da li quando viene richiamato
@@ -69,7 +62,7 @@ namespace TetrisGame
             //e dividendolo per il numero degli stati dei blocchi quindi 4 
             //ottengo il resto che sarà sempre compreso tra 0 e 3
             //in questo modo se sono a uno stato di rotazione 4 tornerò al primo stato, 5 al secondo e cosi via...
-            statoRotazione = (statoRotazione + 1) % pezzi.Length;
+            statoRotazione = (statoRotazione + 1) % Pezzi.Length;
         }
 
         //rotazione pezzo in senso anti orario
@@ -77,7 +70,7 @@ namespace TetrisGame
         {
             if(statoRotazione == 0) //se sono al primo stato devo andare all'ultimo
             {
-                statoRotazione = pezzi.Length - 1; //quindi assegno alla posizione corrente l'ultimo stato del blocco
+                statoRotazione = Pezzi.Length - 1; //quindi assegno alla posizione corrente l'ultimo stato del blocco
             }
             else //se sono in un qualcunque altro stato
             {
@@ -89,8 +82,8 @@ namespace TetrisGame
         public void Reset()
         {
             //riporto la posizione del blocco allo stato iniziale
-            posizione.riga = posizioneIniziale.riga; 
-            posizione.colonna = posizioneIniziale.colonna;
+            posizione.riga = PosizioneIniziale.riga; 
+            posizione.colonna = PosizioneIniziale.colonna;
             statoRotazione = 0; //riporto il blocco successivo al primo stato di rotazione quindi allo stato 0
         }
     }
