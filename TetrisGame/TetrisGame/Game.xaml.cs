@@ -115,6 +115,20 @@ namespace TetrisGame
 
         }
 
+        //metodo asincrono perchè vogliamo aspettare senza bloccare la UI
+        private async Task GameLoop()
+        {
+            disegnaGioco(statoGioco);
+            while (!statoGioco.gameOver)
+            {
+                //l'operatore await ritorna il risultato del metodo in un secondo momento, dopo il completamento dell'operazione in corso
+                await Task.Delay(500);
+                statoGioco.MuoviInBasso();
+                disegnaGioco(statoGioco);
+            }
+
+        }
+
         //evento che rileva pressione tasti dell utente e muove il pezzo in tutte le direzioni
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -148,9 +162,10 @@ namespace TetrisGame
 
         //evento che in caricamento disegna la grid e i blocchi
 
-        private void CanvasGioco_Loaded(object sender, RoutedEventArgs e)
+        private async void CanvasGioco_LoadedAsync(object sender, RoutedEventArgs e)
         {
-            disegnaGioco(statoGioco);
+            //disegnaGioco(statoGioco);
+            await GameLoop();
         }
     }
 }

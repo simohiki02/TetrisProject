@@ -21,7 +21,7 @@
                 Width="250"
                 Height="500"
                 ClipToBounds="True"
-                Loaded="CanvasGioco_Loaded"/>
+                Loaded="CanvasGioco_LoadedAsync"/>
 
         </Viewbox>
 

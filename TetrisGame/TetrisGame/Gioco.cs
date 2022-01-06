@@ -21,6 +21,17 @@ namespace TetrisGame
         public void SetBlocco()
         {
             bloccoCorrente.Reset();
+
+            //permette ai blocchi di comparire in modo più fluido??
+            for(int i = 0; i < 2; i++)
+            {
+                bloccoCorrente.MuoviPezzo(1, 0);
+
+                if (!BloccoValido())
+                {
+                    bloccoCorrente.MuoviPezzo(-1, 0);
+                }
+            }
         }
 
         public Grid GetCampoGioco()
