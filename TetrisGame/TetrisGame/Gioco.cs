@@ -10,54 +10,46 @@ namespace TetrisGame
     {
         private Blocco bloccoCorrente;
         public Grid campoGioco { get; }
-        public ListaBlocchi listaBlocchi;
-        public bool gameOver; 
+        public ListaBlocchi listaBlocchi { get; }
+        public bool gameOver { get; private set; } 
 
-        public Blocco GetBlocco()
+        public Blocco BloccoCorrenteProp
         {
-            return bloccoCorrente;
-        }
+            get => bloccoCorrente;
 
-        public void SetBlocco()
-        {
-            bloccoCorrente.Reset();
-
-            //migliora la posizione iniziale dei blocchi, li fa apparire sempre dalla stessa riga e colonna
-            for(int i = 0; i < 2; i++)
+            private set
             {
-                bloccoCorrente.MuoviPezzo(1, 0);
+                bloccoCorrente = value;
+                bloccoCorrente.Reset();
 
-                if (!BloccoValido())
+                //migliora la posizione iniziale dei blocchi, li fa apparire sempre dalla stessa riga e colonna
+                for (int i = 0; i < 2; i++)
                 {
-                    bloccoCorrente.MuoviPezzo(-1, 0);
+                    bloccoCorrente.MuoviPezzo(1, 0);
+
+                    if (!BloccoValido())
+                    {
+                        bloccoCorrente.MuoviPezzo(-1, 0);
+                    }
                 }
             }
         }
 
-        public Grid GetCampoGioco()
-        {
-            return campoGioco;
-        }
-
-        public ListaBlocchi GetListaBlocchi()
-        {
-            return listaBlocchi;
-        }
 
         public Gioco()
         {
             this.campoGioco = new Grid(22, 10); //inizializza la grid con 22 righe e 10 colonne
             this.listaBlocchi = new ListaBlocchi(); //inizializza la lista dei blocchi
-            this.bloccoCorrente = listaBlocchi.AggiornaBlocco(); //prendo il primo blocco
+            BloccoCorrenteProp = listaBlocchi.AggiornaBlocco(); //prendo il primo blocco
         }
 
         //metodo per posizionare il blocco all'interno della grid
         public void PosizionaBlocco()
         {
             //ad ogni pezzo del blocco corrente assegno l'id del pezzo corrispondente
-            foreach(Cella c in bloccoCorrente.PosizionePezzi())
+            foreach(Cella c in BloccoCorrenteProp.PosizionePezzi())
             {
-                campoGioco[c.riga, c.colonna] = bloccoCorrente.Id; 
+                campoGioco[c.riga, c.colonna] = BloccoCorrenteProp.Id; 
             }
             //controlliamo se ci sono righe completate
             campoGioco.CheckRigheCompletate();
@@ -69,7 +61,7 @@ namespace TetrisGame
             }
             else //altrimenti passo al prossimo blocco
             {
-                bloccoCorrente = listaBlocchi.AggiornaBlocco();
+                BloccoCorrenteProp = listaBlocchi.AggiornaBlocco();
             }
         }
 
@@ -85,7 +77,7 @@ namespace TetrisGame
         private bool BloccoValido()
         {
             //per ogni pezzo del blocco corrente 
-            foreach (Cella c in bloccoCorrente.PosizionePezzi())
+            foreach (Cella c in BloccoCorrenteProp.PosizionePezzi())
             {
                 //se uno dei pezzi del blocco è fuori dalla grid o si sovrappone a un altro non è valido 
                 if (campoGioco.IsEmpty(c.riga, c.colonna) == false)
@@ -99,12 +91,12 @@ namespace TetrisGame
         //metodo per ruotare il blocco in senso orario
         public void RuotaBloccoOrario()
         {
-            bloccoCorrente.RuotaPezzoSensoOrario();
+            BloccoCorrenteProp.RuotaPezzoSensoOrario();
             //se il blocco non può essere ruotato perchè altrimenti andrebbe fuori dalla grid
             if (BloccoValido() == false) 
             {
                 //lo ruotiamo nell'altro senso
-                bloccoCorrente.RuotaPezzoSensoAntiOrario();
+                BloccoCorrenteProp.RuotaPezzoSensoAntiOrario();
             }
         }
 
@@ -112,10 +104,10 @@ namespace TetrisGame
         //operazioni inverse di quello orario
         public void RuotaBloccoAntiOrario()
         {
-            bloccoCorrente.RuotaPezzoSensoAntiOrario();
+            BloccoCorrenteProp.RuotaPezzoSensoAntiOrario();
             if (BloccoValido() == false)
             {
-                bloccoCorrente.RuotaPezzoSensoOrario();
+                BloccoCorrenteProp.RuotaPezzoSensoOrario();
             }
         }
 
@@ -123,11 +115,11 @@ namespace TetrisGame
         public void MuoviInBasso()
         {
             //sommo semplicemente 1 alle righe del pezzo
-            bloccoCorrente.MuoviPezzo(1, 0);
+            BloccoCorrenteProp.MuoviPezzo(1, 0);
             if (BloccoValido() == false) //se il pezzo esce dalla grid
             {
                 //lo risposto in alto quindi sposto la riga indietro di 1
-                bloccoCorrente.MuoviPezzo(-1, 0);
+                BloccoCorrenteProp.MuoviPezzo(-1, 0);
 
                 //e chiamo il blocco successivo dato che sono arrivato in fondo o ho colliso con un altro pezzo
                 PosizionaBlocco();
@@ -138,11 +130,11 @@ namespace TetrisGame
         public void MuoviADestra()
         {
             //sommo semplicemente 1 alle colonne del pezzo
-            bloccoCorrente.MuoviPezzo(0, 1); 
+            BloccoCorrenteProp.MuoviPezzo(0, 1); 
             if (BloccoValido() == false) //se il pezzo esce dalla grid
             {
                 //lo risposto indietro quindi sposto la colonna indietro di 1
-                bloccoCorrente.MuoviPezzo(0, -1);
+                BloccoCorrenteProp.MuoviPezzo(0, -1);
             }
         }
 
@@ -150,11 +142,11 @@ namespace TetrisGame
         public void MuoviASinistra()
         {
             //sottraggo semplicemente 1 alle colonne del pezzo
-            bloccoCorrente.MuoviPezzo(0, -1);
+            BloccoCorrenteProp.MuoviPezzo(0, -1);
             if (BloccoValido() == false) //se il pezzo esce dalla grid
             {
                 //lo risposto avanti quindi sposto la colonna avanti di 1
-                bloccoCorrente.MuoviPezzo(0, 1);
+                BloccoCorrenteProp.MuoviPezzo(0, 1);
             }
         }
     }

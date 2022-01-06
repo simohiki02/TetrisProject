@@ -115,7 +115,7 @@ namespace TetrisGame
         private void DisegnaGioco(Gioco statoGioco)
         {
             DisegnaCampo(statoGioco.campoGioco);
-            DisegnaBlocco(statoGioco.GetBlocco());
+            DisegnaBlocco(statoGioco.BloccoCorrenteProp);
 
         }
 
