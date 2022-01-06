@@ -11,24 +11,14 @@ namespace TetrisGame
     {
         private int[,] campo;
 
-        public int righe;
-        public int colonne;
+        public int righe { get; }
+        public int colonne { get; }
 
         //indicizzatore, grazie a questo posso accedere direttamente ai valori tramite l'instanza di un oggetto 
         public int this[int r, int c]
         {
             get => campo[r, c];
             set => campo[r, c] = value;
-        }
-
-        public int GetRighe()
-        {
-            return righe;
-        }
-
-        public int GetColonne()
-        {
-            return colonne;
         }
 
         //costruttore
@@ -97,6 +87,7 @@ namespace TetrisGame
             return true;
         }
 
+        //metodo che pulisce un intera riga risolta
         public void PulisciRiga(int r)
         {
             for (int c = 0; c < colonne; c++)

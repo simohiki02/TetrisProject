@@ -18,7 +18,7 @@ namespace TetrisGame
             new J(),
             new I(),
             new L(),
-            new O(),
+            new O()
         };
         public Blocco prossimoBlocco { get; set; } //property per il blocco successivo
 

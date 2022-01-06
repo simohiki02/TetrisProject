@@ -22,9 +22,9 @@ namespace TetrisGame
         {
             while(Pacchetto.connessione != 'c')
             {
-                if(dati.getSizeDaInviare() > 0)
+                if(dati.GetSizeDaInviare() > 0)
                 {
-                    string p = dati.getDaInviare(); //prendo il pacchetto da inviare
+                    string p = dati.GetDaInviare(); //prendo il pacchetto da inviare
                     byte[] data = Encoding.ASCII.GetBytes(p); //trasformo in byte
                     client.Send(data, data.Length, "localhost", 12347); //invio
                 }

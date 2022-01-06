@@ -10,6 +10,7 @@ namespace TetrisGame.GraficaTetris
     public class Z: Blocco
     {
         protected override Cella PosizioneIniziale => new Cella(0, 3);
+        public override int Id => 7;
         protected override Cella[][] Pezzi => new Cella[][]
         {
            new Cella[]  { new Cella (0,0), new Cella(0,1), new Cella(1,1), new Cella (1,2) },
@@ -19,6 +20,6 @@ namespace TetrisGame.GraficaTetris
            new Cella[]  { new Cella(0,1),new Cella(1,0), new Cella(1,1), new Cella(2,0) }
         };
 
-        public override int Id => 7;
+        
     }
 }

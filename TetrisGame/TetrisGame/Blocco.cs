@@ -30,11 +30,7 @@ namespace TetrisGame
             posizione = new Cella(PosizioneIniziale.riga, PosizioneIniziale.colonna);
         }
 
-        //mi ritorna il vettore dei pezzi
-        public Cella[][] GetPezzi()
-        {
-            return Pezzi;
-        }
+       
 
         //metodo che ritorna le posizioni occupate dai blocchi
         //uso un enum perchè ho bisogno solo di leggere dalla raccolta

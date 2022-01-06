@@ -24,10 +24,10 @@ namespace TetrisGame
         //oggetto che controlla lo stato del gioco
         private Gioco statoGioco = new Gioco();
 
-        //metodo che disegna i blocchi della grid
-        private Image[,] setupCanvas(Grid grid)
+        //metodo che suddivide la grid in tanti blocchi vuoti, grazie a matrice di oggetti blocchi/immagini
+        private Image[,] SetupCanvas(Grid grid)
         {
-            Image[,] controlloImmagini = new Image[grid.righe, grid.colonne];
+            Image[,] controlloImmagini = new Image[grid.righe, grid.colonne];   //il vettore controller-immagini contiente 22 righe e 10 colonne come
             int dimensioniCelle = 25;
 
 
@@ -35,27 +35,31 @@ namespace TetrisGame
             {
                 for (int c = 0; c < grid.colonne; c++)
                 {
+                    //per ogni riga e colonna della grid, creiamo un controller immagine di 25 pixel di larghezza per lunghezza
                     Image controllerImmagine = new Image
                     {
                         Width = dimensioniCelle,
                         Height = dimensioniCelle
                     };
-
+                    //metodi per posizionare il controller immagine all interno della grid
+                    //contiamo le righe dall alto verso il basso e le colonne da sinistra verso destra, impostiamo la distanza tra il canvas e dall'alto dell immagine,
+                    //il -2 è per portare le 2 righe nascoste verso l alto , cosi non sono dentro il canvas
                     Canvas.SetTop(controllerImmagine, (r - 2) * dimensioniCelle);
                     Canvas.SetLeft(controllerImmagine, c * dimensioniCelle);
+
                     CanvasGioco.Children.Add(controllerImmagine);
                     controlloImmagini[r, c] = controllerImmagine;
                 }
             }
             return controlloImmagini;
         }
-
+        
         //creo vettore per i colori dei pezzi
         private ImageSource[] coloriBlocchi = new ImageSource[]
         {
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileEmpty.png", UriKind.Relative)),
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileBlue.png", UriKind.Relative)),
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileCyan.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileEmpty.png", UriKind.Relative)),
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileGreen.png", UriKind.Relative)),
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileOrange.png", UriKind.Relative)),
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TilePurple.png", UriKind.Relative)),
@@ -80,17 +84,17 @@ namespace TetrisGame
         public Game()
         {
             InitializeComponent();
-            controlloImmagini = setupCanvas(statoGioco.campoGioco);
+            controlloImmagini = SetupCanvas(statoGioco.campoGioco);
         }
 
         //metodo che disegna la grid del gioco
-        private void disegnaCampo(Grid grid)
+        private void DisegnaCampo(Grid grid)
         {
             for(int r = 0; r < grid.righe; r++)
             {
                 for(int c = 0; c < grid.colonne; c++)
                 {
-                    int id = grid[r, c];
+                    int id = grid[r, c];    //sarà sempre 0 perchè i valori delle celle non sono settati
                     controlloImmagini[r, c].Source = coloriBlocchi[id];
                 }
             }
@@ -98,7 +102,7 @@ namespace TetrisGame
 
 
         //metodo che disegna i blocchi
-        private void disegnaBlocco(Blocco blocco)
+        private void DisegnaBlocco(Blocco blocco)
         {
             foreach(Cella c in blocco.PosizionePezzi())
             {
@@ -108,23 +112,23 @@ namespace TetrisGame
 
 
         //metodo che avvia il gioco con una grid e i blocchi di partenza
-        private void disegnaGioco(Gioco statoGioco)
+        private void DisegnaGioco(Gioco statoGioco)
         {
-            disegnaCampo(statoGioco.campoGioco);
-            disegnaBlocco(statoGioco.GetBlocco());
+            DisegnaCampo(statoGioco.campoGioco);
+            DisegnaBlocco(statoGioco.GetBlocco());
 
         }
 
         //metodo asincrono perchè vogliamo aspettare senza bloccare la UI
         private async Task GameLoop()
         {
-            disegnaGioco(statoGioco);
+            DisegnaGioco(statoGioco);
             while (!statoGioco.gameOver)
             {
                 //l'operatore await ritorna il risultato del metodo in un secondo momento, dopo il completamento dell'operazione in corso
                 await Task.Delay(500);
                 statoGioco.MuoviInBasso();
-                disegnaGioco(statoGioco);
+                DisegnaGioco(statoGioco);
             }
 
         }
@@ -151,13 +155,13 @@ namespace TetrisGame
                 case Key.Up:
                     statoGioco.RuotaBloccoOrario();
                     break;
-                case Key.Z:
+                case Key.A:
                     statoGioco.RuotaBloccoAntiOrario();
                     break;
                 default:
                     return;
             }
-            disegnaGioco(statoGioco);
+            DisegnaGioco(statoGioco);
         }
 
         //evento che in caricamento disegna la grid e i blocchi

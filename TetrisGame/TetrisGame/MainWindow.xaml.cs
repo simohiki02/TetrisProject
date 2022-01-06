@@ -43,13 +43,13 @@ namespace TetrisGame
             {
                 string name = Interaction.InputBox("Inserisci il tuo nome");
                 string pacchetto = "y;" + name; 
-                dati.addDaInviare(pacchetto); //lo aggiungo alla lista dei pacchetti da inviare
+                dati.AddDaInviare(pacchetto); //lo aggiungo alla lista dei pacchetti da inviare
                 StartGame();
             }
             else
             {
                 string pacchetto = "n;" + "null";
-                dati.addDaInviare(pacchetto); //lo aggiungo alla lista dei pacchetti da inviare
+                dati.AddDaInviare(pacchetto); //lo aggiungo alla lista dei pacchetti da inviare
             }
         }
 
@@ -74,7 +74,7 @@ namespace TetrisGame
             string nome = TxtNome.Text; //prendo il nome dell'utente
             string ip = TxtIpDest.Text; //ip del destinatario
             Client.address = ip; //salvo l'indirizzo del destinatario
-            dati.addDaInviare("a;" + nome); //salvo nella lista il pacchetto da inviare
+            dati.AddDaInviare("a;" + nome); //salvo nella lista il pacchetto da inviare
         }
     }
 }

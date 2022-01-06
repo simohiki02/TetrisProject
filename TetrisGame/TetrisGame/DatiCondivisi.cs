@@ -17,36 +17,36 @@ namespace TetrisGame
             DaInviare = new List<string>();
         }
 
-        public void addDaElaborare(Pacchetto p) //aggiungo il pacchetto da elaborare
+        public void AddDaElaborare(Pacchetto p) //aggiungo il pacchetto da elaborare
         {
             DaElaborare.Add(p);
         }
 
-        public Pacchetto getDaElaborare() //prendo il pacchetto da elaborare
+        public Pacchetto GetDaElaborare() //prendo il pacchetto da elaborare
         {
             Pacchetto p = DaElaborare[DaElaborare.Count - 1]; //prendo l'ultimo pacchetto
             DaElaborare.RemoveAt(DaElaborare.Count - 1); //lo rimuovo dalla lista
             return p;
         }
 
-        public int getSizeDaElaborare() //mi restituisce il n degli elementi della lista
+        public int GetSizeDaElaborare() //mi restituisce il n degli elementi della lista
         {
             return DaElaborare.Count;
         }
 
-        public void addDaInviare(string p) //aggiungo il pacchetto da inviare
+        public void AddDaInviare(string p) //aggiungo il pacchetto da inviare
         {
             DaInviare.Add(p);
         }
 
-        public string getDaInviare() //prendo il pacchetto da inviare
+        public string GetDaInviare() //prendo il pacchetto da inviare
         {
             string p = DaInviare[DaInviare.Count - 1]; //prendo l'ultimo pacchetto
             DaInviare.RemoveAt(DaInviare.Count - 1); //lo rimuovo dalla lista
             return p;
         }
 
-        public int getSizeDaInviare() //mi restituisce il n degli elementi della lista
+        public int GetSizeDaInviare() //mi restituisce il n degli elementi della lista
         {
             return DaInviare.Count;
         }

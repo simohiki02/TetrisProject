@@ -11,7 +11,7 @@ namespace TetrisGame
         private Blocco bloccoCorrente;
         public Grid campoGioco { get; }
         public ListaBlocchi listaBlocchi;
-        public bool gameOver; //sarà true in caso l'utente perda
+        public bool gameOver; 
 
         public Blocco GetBlocco()
         {
@@ -22,7 +22,7 @@ namespace TetrisGame
         {
             bloccoCorrente.Reset();
 
-            //permette ai blocchi di comparire in modo più fluido??
+            //migliora la posizione iniziale dei blocchi, li fa apparire sempre dalla stessa riga e colonna
             for(int i = 0; i < 2; i++)
             {
                 bloccoCorrente.MuoviPezzo(1, 0);

@@ -19,9 +19,9 @@ namespace TetrisGame
         {
             while(Pacchetto.connessione != 'c')
             {
-                if(dati.getSizeDaElaborare() > 0) //se sono presenti pacchetti
+                if(dati.GetSizeDaElaborare() > 0) //se sono presenti pacchetti
                 {
-                    Pacchetto p = dati.getDaElaborare(); //prendo il pacchetto
+                    Pacchetto p = dati.GetDaElaborare(); //prendo il pacchetto
                     if(p.tipo == "g") //pacchetto game
                     {
 
