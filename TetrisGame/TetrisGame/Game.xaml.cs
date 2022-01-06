@@ -19,10 +19,12 @@ namespace TetrisGame
     /// </summary>
     public partial class Game : Window
     {
-
+        //vettore contenent immagini dei blocchi
         private Image[,] controlloImmagini;
+        //oggetto che controlla lo stato del gioco
         private Gioco statoGioco = new Gioco();
 
+        //metodo che disegna i blocchi della grid
         private Image[,] setupCanvas(Grid grid)
         {
             Image[,] controlloImmagini = new Image[grid.righe, grid.colonne];
@@ -48,6 +50,7 @@ namespace TetrisGame
             return controlloImmagini;
         }
 
+        //creo vettore per i colori dei pezzi
         private ImageSource[] coloriBlocchi = new ImageSource[]
         {
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileBlue.png", UriKind.Relative)),
@@ -61,6 +64,7 @@ namespace TetrisGame
 
         };
 
+        //creo vettore con forme dei pezzi
         private ImageSource[] immaginiBlocchi = new ImageSource[]
         {
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-Empty.png", UriKind.Relative)),
@@ -79,6 +83,7 @@ namespace TetrisGame
             controlloImmagini = setupCanvas(statoGioco.campoGioco);
         }
 
+        //metodo che disegna la grid del gioco
         private void disegnaCampo(Grid grid)
         {
             for(int r = 0; r < grid.righe; r++)
@@ -91,6 +96,8 @@ namespace TetrisGame
             }
         }
 
+
+        //metodo che disegna i blocchi
         private void disegnaBlocco(Blocco blocco)
         {
             foreach(Cella c in blocco.PosizionePezzi())
@@ -99,6 +106,8 @@ namespace TetrisGame
             }
         }
 
+
+        //metodo che avvia il gioco con una grid e i blocchi di partenza
         private void disegnaGioco(Gioco statoGioco)
         {
             disegnaCampo(statoGioco.campoGioco);
@@ -106,10 +115,38 @@ namespace TetrisGame
 
         }
 
+        //evento che rileva pressione tasti dell utente e muove il pezzo in tutte le direzioni
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            if (statoGioco.gameOver)
+            {
+                return;
+            }
 
+            switch (e.Key)
+            {
+                case Key.Left:
+                    statoGioco.MuoviASinistra();
+                    break;
+                case Key.Right:
+                    statoGioco.MuoviADestra();
+                    break;
+                case Key.Down:
+                    statoGioco.MuoviInBasso();
+                    break;
+                case Key.Up:
+                    statoGioco.RuotaBloccoOrario();
+                    break;
+                case Key.Z:
+                    statoGioco.RuotaBloccoAntiOrario();
+                    break;
+                default:
+                    return;
+            }
+            disegnaGioco(statoGioco);
         }
+
+        //evento che in caricamento disegna la grid e i blocchi
 
         private void CanvasGioco_Loaded(object sender, RoutedEventArgs e)
         {

@@ -35,7 +35,7 @@ namespace TetrisGame
 
         public Gioco()
         {
-            this.campoGioco = new Grid(22, 10); //inizilizza la grid ccon 22 righe e 10 colonne
+            this.campoGioco = new Grid(22, 10); //inizializza la grid con 22 righe e 10 colonne
             this.listaBlocchi = new ListaBlocchi(); //inizializza la lista dei blocchi
             this.bloccoCorrente = listaBlocchi.AggiornaBlocco(); //prendo il primo blocco
         }
