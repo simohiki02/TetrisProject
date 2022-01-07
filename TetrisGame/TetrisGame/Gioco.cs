@@ -152,5 +152,36 @@ namespace TetrisGame
                 BloccoCorrenteProp.MuoviPezzo(0, 1);
             }
         }
+
+        //metodo che prende la posizione di un blocco e ne ritorna le celle vuote immediatamente sotto di lui
+        //in questo modo troviamo di quante celle verso il basso, può essere mosso il blocco
+        
+        private int NumCelleCaduta(Cella c)
+        {
+            int distanza = 0;
+            while(CampoGioco.IsEmpty(c.riga + distanza + 1 , c.colonna))    
+            {
+                distanza++;
+            }
+            return distanza;
+        }
+
+        //metodo che richiama il NumCelleCaduta per ogni pezzo nel blocco corrente e controlla il valore minimo con l'apposita funzione Math
+        public int DistanzaCadutaBlocco()
+        {
+            int distanza = CampoGioco.righe;
+            foreach(Cella c in BloccoCorrenteProp.PosizionePezzi())
+            {
+                distanza = System.Math.Min(distanza, NumCelleCaduta(c));
+            }
+            return distanza;
+        }
+
+        //metodo che muove il blocco verso il basso di quante più righe possibile
+        public void CadutaBlocco()
+        {
+            BloccoCorrenteProp.MuoviPezzo(DistanzaCadutaBlocco(), 0);
+            PosizionaBlocco();
+        }
     }
 }

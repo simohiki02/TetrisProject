@@ -116,14 +116,14 @@ namespace TetrisGame
             DisegnaCampo(statoGioco.CampoGioco);
             DisegnaBlocco(statoGioco.BloccoCorrenteProp);
             PreviewProxBlocco(statoGioco.ListaBlocchi);
-            txtPunteggio.Text = "Punteggio: " + statoGioco.Score; //aggiorno il punteggio nella textbox
+            //txtPunteggio.Text = "Punteggio: " + statoGioco.Score; //aggiorno il punteggio nella textbox
         }
 
         //visualizza il prossimo blocco
         private void PreviewProxBlocco(ListaBlocchi listaBlocchi)
         {
             Blocco proxBlocco = listaBlocchi.prossimoBlocco; //prendiamo il blocco successivo
-            ImgProxBlocco.Source = immaginiBlocchi[proxBlocco.Id]; //applichiamo l'immagine dell'id corrispondente
+            //ImgProxBlocco.Source = immaginiBlocchi[proxBlocco.Id]; //applichiamo l'immagine dell'id corrispondente
         }
 
         //private void Timer()
@@ -150,6 +150,7 @@ namespace TetrisGame
                 statoGioco.MuoviInBasso();
                 DisegnaGioco(statoGioco);
             }
+            GameOverMenu.Visibility = Visibility.Visible;
         }
 
         //evento che rileva pressione tasti dell utente e muove il pezzo in tutte le direzioni
@@ -176,6 +177,9 @@ namespace TetrisGame
                     break;
                 case Key.A:
                     statoGioco.RuotaBloccoAntiOrario();
+                    break;
+                case Key.Space:
+                    statoGioco.CadutaBlocco();
                     break;
                 default:
                     return;
