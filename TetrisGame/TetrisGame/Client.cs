@@ -14,7 +14,7 @@ namespace TetrisGame
         public static string address; //indirizzo del destinatario
         public Client(DatiCondivisi dati)
         {
-            client = new UdpClient(12346);
+            client = new UdpClient();
             this.dati = dati;
         }
 
@@ -26,7 +26,7 @@ namespace TetrisGame
                 {
                     string p = dati.GetDaInviare(); //prendo il pacchetto da inviare
                     byte[] data = Encoding.ASCII.GetBytes(p); //trasformo in byte
-                    client.Send(data, data.Length, "localhost", 12347); //invio
+                    client.Send(data, data.Length, address, 12347); //invio
                 }
             }
         }

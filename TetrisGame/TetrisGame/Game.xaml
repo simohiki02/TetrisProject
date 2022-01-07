@@ -5,31 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TetrisGame"
         mc:Ignorable="d"
-        Title="Tetris" Height="600" Width="800" HorizontalAlignment="Left" VerticalAlignment="Top" ResizeMode="CanMinimize"  KeyDown="Window_KeyDown">
+        Title="Tetris" Height="606.4" Width="1073.6" HorizontalAlignment="Left" VerticalAlignment="Top" ResizeMode="CanMinimize"  KeyDown="Window_KeyDown">
     <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF001346" Offset="0"/>
-            <GradientStop Color="#FF000C81" Offset="1"/>
-        </LinearGradientBrush>
+        <ImageBrush>
+            <ImageBrush.ImageSource>
+                <BitmapImage UriSource="GraficaTetris/TetrisLogo.jpg"/>
+            </ImageBrush.ImageSource>
+        </ImageBrush>
     </Window.Background>
 
-    <Grid x:Name="grid" Margin="0,0,0,1">
-        <Viewbox Grid.Row="1"
-                Grid.Column="1" Margin="0,0,0,20">
-            <Canvas x:Name="CanvasGioco"
-                Background="Black"
-                Width="250"
-                Height="500"
-                ClipToBounds="True"
-                Loaded="CanvasGioco_LoadedAsync"/>
-
-        </Viewbox>
-
-
-
+    <Grid>
+        <Canvas x:Name="CanvasGioco" Background="#101010" Width="250" Height="510" ClipToBounds="True" Loaded="CanvasGioco_LoadedAsync"/>
+        <TextBox x:Name="txtPunteggio" HorizontalAlignment="Left" Height="58" Margin="707,33,0,0" TextWrapping="Wrap" Text="Punteggio:" VerticalAlignment="Top" Width="289" Background="White" FontSize="40" FontFamily="Impact"/>
+        <TextBox x:Name="txtPunteggio_Copy" HorizontalAlignment="Left" Height="101" Margin="747,146,0,0" TextWrapping="Wrap" Text="Prossimo blocco:" VerticalAlignment="Top" Width="203" Background="White" FontSize="40" FontFamily="Impact" TextAlignment="Center"/>
+        <Image x:Name="ImgProxBlocco" HorizontalAlignment="Left" Height="179" Margin="747,247,0,0" VerticalAlignment="Top" Width="203" Stretch="Fill"/>
+        <TextBox x:Name="txtTimer" HorizontalAlignment="Left" Height="58" TextWrapping="Wrap" Text="Timer:" VerticalAlignment="Top" Width="289" Background="White" FontSize="40" FontFamily="Impact"/>
     </Grid>
-
-
-
-
 </Window>

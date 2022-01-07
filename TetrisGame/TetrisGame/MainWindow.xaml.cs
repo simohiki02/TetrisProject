@@ -22,18 +22,13 @@ namespace TetrisGame
     /// </summary>
     public partial class MainWindow : Window
     {
-        static List<string> listaDati = new List<string>(); //lista dei dati da inviare
         static DatiCondivisi dati = new DatiCondivisi(); //inizializzo i dati condivisi
-        
-
         public MainWindow()
         {
             InitializeComponent();
             Peer p = new Peer(dati); //costruttore dei Thread
             p.StartThread(); //start dei thread
         }
-
-       
 
         public static void MessConnessione(string nome)
         {
@@ -52,7 +47,6 @@ namespace TetrisGame
                 dati.AddDaInviare(pacchetto); //lo aggiungo alla lista dei pacchetti da inviare
             }
         }
-
         public static void MessNoConnessione() //ho mandato una richiesta ma non è stata accettata
         {
             string mess = "connessione non accettata";
@@ -65,8 +59,7 @@ namespace TetrisGame
                 Game game = new Game();
                 game.Show(); //apro la finestra di gioco
                 Application.Current.MainWindow.Close(); //chiudo la finestra corrente
-            });
-            
+            }); 
         }
 
         private void BtnConnetti_Click(object sender, RoutedEventArgs e)

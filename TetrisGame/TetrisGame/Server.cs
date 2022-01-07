@@ -19,10 +19,10 @@ namespace TetrisGame
         public Server(DatiCondivisi dati) 
         {
             this.dati = dati;
-            riceveEP = new IPEndPoint(IPAddress.Any, 12345);
+            riceveEP = new IPEndPoint(IPAddress.Any, 12347);
             dataReceived = new byte[1500];
             risposta = "";
-            client = new UdpClient(12345);
+            client = new UdpClient(12347);
         }
 
         public void Ricevi()

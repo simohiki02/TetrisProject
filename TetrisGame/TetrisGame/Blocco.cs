@@ -30,8 +30,6 @@ namespace TetrisGame
             posizione = new Cella(PosizioneIniziale.riga, PosizioneIniziale.colonna);
         }
 
-       
-
         //metodo che ritorna le posizioni occupate dai blocchi
         //uso un enum perchè ho bisogno solo di leggere dalla raccolta
         public IEnumerable<Cella> PosizionePezzi() //restituisce un enum

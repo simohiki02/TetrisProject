@@ -15,6 +15,5 @@ namespace TetrisGame.GraficaTetris
         {
             new Cella[]{new Cella(0,0), new Cella (0,1), new Cella(1,0), new Cella(1,1)}
         };
-        
     }
 }

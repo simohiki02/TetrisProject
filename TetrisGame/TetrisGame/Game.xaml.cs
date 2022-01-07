@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace TetrisGame
 {
@@ -58,14 +59,13 @@ namespace TetrisGame
         private ImageSource[] coloriBlocchi = new ImageSource[]
         {
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileEmpty.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileBlue.png", UriKind.Relative)),
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileCyan.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileGreen.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileBlue.png", UriKind.Relative)),
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileOrange.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileYellow.png", UriKind.Relative)),
+            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileGreen.png", UriKind.Relative)),
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TilePurple.png", UriKind.Relative)),
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileRed.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileYellow.png", UriKind.Relative))
-
         };
 
         //creo vettore con forme dei pezzi
@@ -84,7 +84,8 @@ namespace TetrisGame
         public Game()
         {
             InitializeComponent();
-            controlloImmagini = SetupCanvas(statoGioco.campoGioco);
+            //Timer(); //avvio timer
+            controlloImmagini = SetupCanvas(statoGioco.CampoGioco);
         }
 
         //metodo che disegna la grid del gioco
@@ -100,7 +101,6 @@ namespace TetrisGame
             }
         }
 
-
         //metodo che disegna i blocchi
         private void DisegnaBlocco(Blocco blocco)
         {
@@ -110,33 +110,52 @@ namespace TetrisGame
             }
         }
 
-
         //metodo che avvia il gioco con una grid e i blocchi di partenza
         private void DisegnaGioco(Gioco statoGioco)
         {
-            DisegnaCampo(statoGioco.campoGioco);
+            DisegnaCampo(statoGioco.CampoGioco);
             DisegnaBlocco(statoGioco.BloccoCorrenteProp);
-
+            PreviewProxBlocco(statoGioco.ListaBlocchi);
+            txtPunteggio.Text = "Punteggio: " + statoGioco.Score; //aggiorno il punteggio nella textbox
         }
+
+        //visualizza il prossimo blocco
+        private void PreviewProxBlocco(ListaBlocchi listaBlocchi)
+        {
+            Blocco proxBlocco = listaBlocchi.prossimoBlocco; //prendiamo il blocco successivo
+            ImgProxBlocco.Source = immaginiBlocchi[proxBlocco.Id]; //applichiamo l'immagine dell'id corrispondente
+        }
+
+        //private void Timer()
+        //{
+        //    DispatcherTimer timer = new DispatcherTimer();
+        //    timer.Interval = TimeSpan.FromSeconds(1);
+        //    timer.Tick += Timer_Tick;
+        //    timer.Start();
+        //}
+
+        //private void Timer_Tick(object sender, EventArgs e)
+        //{
+        //    txtTimer.Text = DateTime.Now.ToString("mm:ss");
+        //}
 
         //metodo asincrono perchè vogliamo aspettare senza bloccare la UI
         private async Task GameLoop()
         {
             DisegnaGioco(statoGioco);
-            while (!statoGioco.gameOver)
+            while (!statoGioco.GameOver)
             {
                 //l'operatore await ritorna il risultato del metodo in un secondo momento, dopo il completamento dell'operazione in corso
                 await Task.Delay(500);
                 statoGioco.MuoviInBasso();
                 DisegnaGioco(statoGioco);
             }
-
         }
 
         //evento che rileva pressione tasti dell utente e muove il pezzo in tutte le direzioni
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (statoGioco.gameOver)
+            if (statoGioco.GameOver)
             {
                 return;
             }
@@ -165,7 +184,6 @@ namespace TetrisGame
         }
 
         //evento che in caricamento disegna la grid e i blocchi
-
         private async void CanvasGioco_LoadedAsync(object sender, RoutedEventArgs e)
         {
             //disegnaGioco(statoGioco);

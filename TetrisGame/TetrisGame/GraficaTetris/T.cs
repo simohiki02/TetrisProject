@@ -14,11 +14,9 @@ namespace TetrisGame.GraficaTetris
         protected override Cella[][] Pezzi => new Cella[][]
         {
            new Cella[]  { new Cella (0,1), new Cella(1,0), new Cella(1,1), new Cella (1,2) },
-
            new Cella[]  {new Cella(0,1), new Cella(1,1), new Cella(1,2), new Cella(2,1)},
            new Cella[]  { new Cella(1,0),new Cella(1,1), new Cella(1,2), new Cella(2,1)},
            new Cella[]  { new Cella(0,1),new Cella(1,0), new Cella(1,1), new Cella(2,1) }
         };
-        
     }
 }

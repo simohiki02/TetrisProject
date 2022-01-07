@@ -9,9 +9,10 @@ namespace TetrisGame
     public class Gioco
     {
         private Blocco bloccoCorrente;
-        public Grid campoGioco { get; }
-        public ListaBlocchi listaBlocchi { get; }
-        public bool gameOver { get; private set; } 
+        public Grid CampoGioco { get; }
+        public ListaBlocchi ListaBlocchi { get; }
+        public bool GameOver { get; private set; } 
+        public int Score { get; set; } 
 
         public Blocco BloccoCorrenteProp
         {
@@ -38,9 +39,9 @@ namespace TetrisGame
 
         public Gioco()
         {
-            this.campoGioco = new Grid(22, 10); //inizializza la grid con 22 righe e 10 colonne
-            this.listaBlocchi = new ListaBlocchi(); //inizializza la lista dei blocchi
-            BloccoCorrenteProp = listaBlocchi.AggiornaBlocco(); //prendo il primo blocco
+            this.CampoGioco = new Grid(22, 10); //inizializza la grid con 22 righe e 10 colonne
+            this.ListaBlocchi = new ListaBlocchi(); //inizializza la lista dei blocchi
+            BloccoCorrenteProp = ListaBlocchi.AggiornaBlocco(); //prendo il primo blocco
         }
 
         //metodo per posizionare il blocco all'interno della grid
@@ -49,19 +50,21 @@ namespace TetrisGame
             //ad ogni pezzo del blocco corrente assegno l'id del pezzo corrispondente
             foreach(Cella c in BloccoCorrenteProp.PosizionePezzi())
             {
-                campoGioco[c.riga, c.colonna] = BloccoCorrenteProp.Id; 
+                CampoGioco[c.riga, c.colonna] = BloccoCorrenteProp.Id; 
             }
             //controlliamo se ci sono righe completate
-            campoGioco.CheckRigheCompletate();
+            //e le aggiungiamo al punteggio che poi verrà visualizzato nella grafica
+            //tramite la classe "Game"
+            Score += CampoGioco.CheckRigheCompletate();
 
             //controlliamo se l'utente ha perso
             if(IsGameOver() == true)
             {
-                gameOver = true; //sentinella
+                GameOver = true; //sentinella
             }
             else //altrimenti passo al prossimo blocco
             {
-                BloccoCorrenteProp = listaBlocchi.AggiornaBlocco();
+                BloccoCorrenteProp = ListaBlocchi.AggiornaBlocco();
             }
         }
 
@@ -69,7 +72,7 @@ namespace TetrisGame
         public bool IsGameOver()
         {
             //se le prime due righe della grid non sono vuote l'utente ha perso
-            return !(campoGioco.RigaVuota(0) && campoGioco.RigaVuota(1));
+            return !(CampoGioco.RigaVuota(0) && CampoGioco.RigaVuota(1));
         }
 
         //metodo che verifica se il blocco è in una posizione valida
@@ -80,7 +83,7 @@ namespace TetrisGame
             foreach (Cella c in BloccoCorrenteProp.PosizionePezzi())
             {
                 //se uno dei pezzi del blocco è fuori dalla grid o si sovrappone a un altro non è valido 
-                if (campoGioco.IsEmpty(c.riga, c.colonna) == false)
+                if (CampoGioco.IsEmpty(c.riga, c.colonna) == false)
                 {
                     return false;
                 }
