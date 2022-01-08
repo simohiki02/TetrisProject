@@ -71,6 +71,7 @@
     <Compile Include="Grid.cs" />
     <Compile Include="ListaBlocchi.cs" />
     <Compile Include="Server.cs" />
+    <Compile Include="Tempo.cs" />
     <Page Include="Game.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

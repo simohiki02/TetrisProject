@@ -36,7 +36,6 @@ namespace TetrisGame
             }
         }
 
-
         public Gioco()
         {
             this.CampoGioco = new Grid(22, 10); //inizializza la grid con 22 righe e 10 colonne
@@ -55,7 +54,7 @@ namespace TetrisGame
             //controlliamo se ci sono righe completate
             //e le aggiungiamo al punteggio che poi verrà visualizzato nella grafica
             //tramite la classe "Game"
-            Score += CampoGioco.CheckRigheCompletate();
+            Score += CampoGioco.CheckRigheCompletate(); //il punteggio equivale al numero di righe completate
 
             //controlliamo se l'utente ha perso
             if(IsGameOver() == true)

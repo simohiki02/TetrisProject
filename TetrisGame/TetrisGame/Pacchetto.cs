@@ -9,7 +9,8 @@ namespace TetrisGame
     class Pacchetto
     {
         public int stato, righe, malus; //stato del gioco, righe risolte, malus
-        public string nome, tipo; //nome del giocatore
+        public static string nome, nomeAvversario; //nome utente o avversario
+        public string tipo; //tipo di pacchetto (connessione,game)
         public static char connessione; //stato connessione
         
         public Pacchetto(string csv) //arriva un pacchetto, splitto i dati

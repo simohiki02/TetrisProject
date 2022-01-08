@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +22,8 @@ namespace TetrisGame
     /// </summary>
     public partial class Game : Window
     {
+        Tempo t = new Tempo(); //classe
+        Thread tempo; //nome Thread
         //vettore contenent immagini dei blocchi
         private Image[,] controlloImmagini;
         //oggetto che controlla lo stato del gioco
@@ -30,7 +34,6 @@ namespace TetrisGame
         {
             Image[,] controlloImmagini = new Image[grid.righe, grid.colonne];   //il vettore controller-immagini contiente 22 righe e 10 colonne come
             int dimensioniCelle = 25;
-
 
             for(int r = 0; r < grid.righe; r++)
             {
@@ -84,8 +87,12 @@ namespace TetrisGame
         public Game()
         {
             InitializeComponent();
-            //Timer(); //avvio timer
             controlloImmagini = SetupCanvas(statoGioco.CampoGioco);
+            lblAvversario.Content = Pacchetto.nomeAvversario;
+
+            //Tempo
+            tempo = new Thread(new ThreadStart(t.Calcola));
+            tempo.Start();
         }
 
         //metodo che disegna la grid del gioco
@@ -116,28 +123,15 @@ namespace TetrisGame
             DisegnaCampo(statoGioco.CampoGioco);
             DisegnaBlocco(statoGioco.BloccoCorrenteProp);
             PreviewProxBlocco(statoGioco.ListaBlocchi);
-            //txtPunteggio.Text = "Punteggio: " + statoGioco.Score; //aggiorno il punteggio nella textbox
+            lblPunteggio.Content = statoGioco.Score; //aggiorno il punteggio nella textbox
         }
 
         //visualizza il prossimo blocco
         private void PreviewProxBlocco(ListaBlocchi listaBlocchi)
         {
             Blocco proxBlocco = listaBlocchi.prossimoBlocco; //prendiamo il blocco successivo
-            //ImgProxBlocco.Source = immaginiBlocchi[proxBlocco.Id]; //applichiamo l'immagine dell'id corrispondente
+            ImgProxBlocco.Source = immaginiBlocchi[proxBlocco.Id]; //applichiamo l'immagine dell'id corrispondente
         }
-
-        //private void Timer()
-        //{
-        //    DispatcherTimer timer = new DispatcherTimer();
-        //    timer.Interval = TimeSpan.FromSeconds(1);
-        //    timer.Tick += Timer_Tick;
-        //    timer.Start();
-        //}
-
-        //private void Timer_Tick(object sender, EventArgs e)
-        //{
-        //    txtTimer.Text = DateTime.Now.ToString("mm:ss");
-        //}
 
         //metodo asincrono perchè vogliamo aspettare senza bloccare la UI
         private async Task GameLoop()
@@ -150,6 +144,10 @@ namespace TetrisGame
                 statoGioco.MuoviInBasso();
                 DisegnaGioco(statoGioco);
             }
+            t.SetStop();
+            tempo.Abort();
+            lblTotPunteggio.Content = "Punteggio: " + lblPunteggio.Content; //punteggio finale
+            lblTotTempo.Content = "Tempo:" + lblTempo.Content; //tempo totale           
             GameOverMenu.Visibility = Visibility.Visible;
         }
 
@@ -192,6 +190,13 @@ namespace TetrisGame
         {
             //disegnaGioco(statoGioco);
             await GameLoop();
+        }
+
+        private void BtnHome_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show(); //apro la schermata iniziale
+            this.Close(); //chiudo questa finestra
         }
     }
 }

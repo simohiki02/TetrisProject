@@ -32,9 +32,12 @@ namespace TetrisGame
                         switch(connection)
                         {
                             case 'a': //richiesta di connessione
-                                MainWindow.MessConnessione(p.nome); //visualizzo il po-up con il nome del mittente
+                                //arrivandomi una richiesta il campo "nome" del pacchetto corrisponde al nome dell'avversario
+                                Pacchetto.nomeAvversario = Pacchetto.nome; //mi salvo il nome dell'avversario
+                                MainWindow.MessConnessione(Pacchetto.nomeAvversario); //visualizzo il po-up con il nome del mittente
                                 break;
                             case 'y': //ho inviato la richiesta, il destinatario ha accettato
+                                Pacchetto.nomeAvversario = Pacchetto.nome;
                                 MainWindow.StartGame();
                                 break;
                             case 'n': //ho inviato la richiesta, il destinatario non ha accettato
