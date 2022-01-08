@@ -23,12 +23,11 @@ namespace TetrisGame
     /// </summary>
     public partial class Game : Window
     {
-        Tempo t = new Tempo(); //classe
-        Thread tempo; //nome Thread
+        DatiCondivisi dati;
         //vettore contenent immagini dei blocchi
         private Image[,] controlloImmagini;
         //oggetto che controlla lo stato del gioco
-        private Gioco statoGioco = new Gioco();
+        private Gioco statoGioco;
 
         //metodo che suddivide la grid in tanti blocchi vuoti, grazie a matrice di oggetti blocchi/immagini
         private Image[,] SetupCanvas(Grid grid)
@@ -85,15 +84,13 @@ namespace TetrisGame
             new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-Z.png", UriKind.Relative))
 
         };
-        public Game()
+        public Game(object dati)
         {
             InitializeComponent();
+            statoGioco = new Gioco(dati);
+            this.dati = dati as DatiCondivisi;
             controlloImmagini = SetupCanvas(statoGioco.CampoGioco);
             lblAvversario.Content = Pacchetto.nomeAvversario;
-
-            //Tempo
-            tempo = new Thread(new ThreadStart(t.Calcola));
-            tempo.Start();
         }
 
         //metodo che disegna la grid del gioco
@@ -118,6 +115,7 @@ namespace TetrisGame
             }
         }
 
+        public static int stato = 0, righe = 0;
         //metodo che avvia il gioco con una grid e i blocchi di partenza
         private void DisegnaGioco(Gioco statoGioco)
         {
@@ -134,6 +132,7 @@ namespace TetrisGame
             ImgProxBlocco.Source = immaginiBlocchi[proxBlocco.Id]; //applichiamo l'immagine dell'id corrispondente
         }
 
+        private bool vinto = false;
         //metodo asincrono perchè vogliamo aspettare senza bloccare la UI
         private async Task GameLoop()
         {
@@ -144,12 +143,22 @@ namespace TetrisGame
                 await Task.Delay(500);
                 statoGioco.MuoviInBasso();
                 DisegnaGioco(statoGioco);
+
+                lblPuntAvversario.Content = righe; //visualizzo le righe risolte dall'avversario
+                if (stato == 1) //l'avversario ha perso
+                {
+                    //cambio la scritta allo stack panel
+                    lblStato.Content = "Hai vinto!";
+                    vinto = true;
+                    statoGioco.GameOver = true; //imposto lo stato gioco a "fine"
+                }
             }
-            t.SetStop(); //fermo il tempo
-            tempo.Abort(); //fermo il thread
-            lblTotPunteggio.Content = "Punteggio: " + lblPunteggio.Content; //punteggio finale
-            lblTotTempo.Content = "Tempo:" + lblTempo.Content; //tempo totale           
-            GameOverMenu.Visibility = Visibility.Visible;
+            if(vinto == false) //se ho perso io
+            {
+                dati.AddDaInviare("g;1;0;-1"); //mando il pacchetto con stato a 1
+                lblTotPunteggio.Content = "Punteggio: " + lblPunteggio.Content; //punteggio finale   
+            }
+            GameOverMenu.Visibility = Visibility.Visible; //visualizzo menu in tutti i casi con scritta iniziale diversa
         }
 
         //evento che rileva pressione tasti dell utente e muove il pezzo in tutte le direzioni
@@ -195,8 +204,6 @@ namespace TetrisGame
 
         private void BtnHome_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow();
-            main.Show(); //apro la schermata iniziale
             this.Close(); //chiudo questa finestra
         }
     }

@@ -21,7 +21,7 @@
                 <DropShadowEffect/>
             </Label.Effect>
         </Label>
-        <Button x:Name="BtnConnetti" Content="CONNETTI" HorizontalAlignment="Left" Height="75" Margin="272,364,0,0" VerticalAlignment="Top" Width="342" FontSize="40" FontFamily="Cooper Black" Background="#FFFF0077" Foreground="White" FontStyle="Italic" Click="BtnConnetti_Click">
+        <Button x:Name="BtnConnetti" Content="CONNETTI" HorizontalAlignment="Left" Height="75" Margin="273,365,0,0" VerticalAlignment="Top" Width="342" FontSize="40" FontFamily="Cooper Black" Background="#FFFF0077" Foreground="White" FontStyle="Italic" Click="BtnConnetti_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>

@@ -10,6 +10,7 @@ namespace TetrisGame
     {
         private List<Pacchetto> DaElaborare; //lista pacchetti da elaborare
         private List<string> DaInviare; //lista pacchetti da inviare
+        public MainWindow mw;
 
         public DatiCondivisi()
         {

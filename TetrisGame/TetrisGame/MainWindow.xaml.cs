@@ -22,15 +22,17 @@ namespace TetrisGame
     /// </summary>
     public partial class MainWindow : Window
     {
-        static DatiCondivisi dati = new DatiCondivisi(); //inizializzo i dati condivisi
+        DatiCondivisi dati; //inizializzo i dati condivisi
         public MainWindow()
         {
             InitializeComponent();
+            dati = new DatiCondivisi();
+            dati.mw = this;
             Peer p = new Peer(dati); //costruttore dei Thread
             p.StartThread(); //start dei thread
         }
 
-        public static void MessConnessione(string nome)
+        public void MessConnessione(string nome)
         {
             string mess = "Accettare la connessione da " + nome + "?";
             MessageBoxResult risposta = MessageBox.Show(mess, "Connessione", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -47,18 +49,17 @@ namespace TetrisGame
                 dati.AddDaInviare(pacchetto); //lo aggiungo alla lista dei pacchetti da inviare
             }
         }
-        public static void MessNoConnessione() //ho mandato una richiesta ma non è stata accettata
+        public void MessNoConnessione() //ho mandato una richiesta ma non è stata accettata
         {
             string mess = "connessione non accettata";
             MessageBox.Show(mess, "Richiesta rifiutata", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        public static void StartGame()
+        public void StartGame()
         {
             Application.Current.Dispatcher.Invoke((Action)delegate {
-                Game game = new Game();
-                game.Show(); //apro la finestra di gioco
-                Application.Current.MainWindow.Close(); //chiudo la finestra corrente
+                Game game = new Game(dati);
+                game.ShowDialog(); //apro la finestra di gioco
             }); 
         }
 

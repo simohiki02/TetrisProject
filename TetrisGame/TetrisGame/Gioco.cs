@@ -8,10 +8,12 @@ namespace TetrisGame
 {
     public class Gioco
     {
+        private DatiCondivisi dati;
+        private int punteggio = 0; //variabile temporanea per il punteggio
         private Blocco bloccoCorrente;
         public Grid CampoGioco { get; }
         public ListaBlocchi ListaBlocchi { get; }
-        public bool GameOver { get; private set; } 
+        public bool GameOver { get; set; } 
         public int Score { get; set; } 
 
         public Blocco BloccoCorrenteProp
@@ -36,13 +38,15 @@ namespace TetrisGame
             }
         }
 
-        public Gioco()
+        public Gioco(object dati)
         {
+            this.dati = dati as DatiCondivisi;
             this.CampoGioco = new Grid(22, 10); //inizializza la grid con 22 righe e 10 colonne
             this.ListaBlocchi = new ListaBlocchi(); //inizializza la lista dei blocchi
             BloccoCorrenteProp = ListaBlocchi.AggiornaBlocco(); //prendo il primo blocco
         }
 
+        
         //metodo per posizionare il blocco all'interno della grid
         public void PosizionaBlocco()
         {
@@ -55,6 +59,12 @@ namespace TetrisGame
             //e le aggiungiamo al punteggio che poi verrà visualizzato nella grafica
             //tramite la classe "Game"
             Score += CampoGioco.CheckRigheCompletate(); //il punteggio equivale al numero di righe completate
+            if(Score != punteggio)
+            {
+                string p = "g;0;" + Score + ";-1";
+                punteggio = Score;
+                dati.AddDaInviare(p);
+            }
 
             //controlliamo se l'utente ha perso
             if(IsGameOver() == true)

@@ -19,10 +19,10 @@ namespace TetrisGame
         public Server(DatiCondivisi dati) 
         {
             this.dati = dati;
-            riceveEP = new IPEndPoint(IPAddress.Any, 12347);
+            riceveEP = new IPEndPoint(IPAddress.Any, 12345);
             dataReceived = new byte[1500];
             risposta = "";
-            client = new UdpClient(12347);
+            client = new UdpClient(12345);
         }
 
         public void Ricevi()
@@ -33,6 +33,8 @@ namespace TetrisGame
                 Client.address = riceveEP.Address.ToString(); //salvo l'indirizzo IP del destinatario
                 risposta = Encoding.ASCII.GetString(dataReceived);
                 Pacchetto p = new Pacchetto(risposta); //creo il pacchetto
+                Game.righe = p.righe; //salvo già le righe risolte
+                Game.stato = p.stato; //e lo stato gioco dell'avversario (sta continuando, ha perso)
                 dati.AddDaElaborare(p); //lo aggiungo alla lista da elaborare 
             }  
         }
