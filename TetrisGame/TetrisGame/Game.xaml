@@ -15,15 +15,19 @@
     </Window.Background>
 
     <Grid>
-        <Canvas x:Name="CanvasGioco" Background="#101010" Width="250" Height="510" ClipToBounds="True" Loaded="CanvasGioco_LoadedAsync"/>
-        <TextBox HorizontalAlignment="Left" Height="101" Margin="747,146,0,0" TextWrapping="Wrap" Text="Prossimo blocco:" VerticalAlignment="Top" Width="203" Background="White" FontSize="40" FontFamily="Impact" TextAlignment="Center"/>
-        <Image x:Name="ImgProxBlocco" HorizontalAlignment="Left" Height="179" Margin="747,247,0,0" VerticalAlignment="Top" Width="203" Stretch="Fill"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="299*"/>
+            <ColumnDefinition Width="57*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas x:Name="CanvasGioco" Background="#101010" Width="250" Height="510" ClipToBounds="True" Loaded="CanvasGioco_LoadedAsync" Margin="409,33,237.5,33.8"/>
+        <TextBox HorizontalAlignment="Left" Height="101" Margin="747,146,0,0" TextWrapping="Wrap" Text="Prossimo blocco:" VerticalAlignment="Top" Width="203" Background="White" FontSize="40" FontFamily="Impact" TextAlignment="Center" Grid.ColumnSpan="2"/>
+        <Image x:Name="ImgProxBlocco" HorizontalAlignment="Left" Height="179" Margin="747,247,0,0" VerticalAlignment="Top" Width="203" Stretch="Fill" Grid.ColumnSpan="2"/>
         <Label Content="Tempo-&gt;" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="150" Background="White" FontSize="40" FontFamily="Impact"/>
-        <Label x:Name="lblTempo" Content="" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="150" Background="White" FontSize="40" FontFamily="Impact" Margin="150,0,0,0"/>
+        <Label x:Name="lblTempo" Content = "{Binding Crono}"  HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="150" Background="White" FontSize="40" FontFamily="Impact" Margin="150,0,0,0"/>
         <Label Content="Stai giocando contro:" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,102,0,0" HorizontalContentAlignment="Center"/>
         <Label x:Name="lblAvversario" Content="" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,160,0,0" HorizontalContentAlignment="Center"/>
         <Label Content="Punteggio:" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="197" Background="White" FontSize="40" FontFamily="Impact" Margin="682,57,0,0"/>
-        <Label x:Name="lblPunteggio" Content="" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="191" Background="White" FontSize="40" FontFamily="Impact" Margin="876,57,0,0"/>
+        <Label x:Name="lblPunteggio" Content="" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="191" Background="White" FontSize="40" FontFamily="Impact" Margin="876,57,0,0" Grid.ColumnSpan="2"/>
         <Label Content="che ha risolto:" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,217,0,0" HorizontalContentAlignment="Center"/>
         <Label x:Name="lblPuntAvversario" Content="" HorizontalAlignment="Left" Height="66" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,270,0,0" HorizontalContentAlignment="Center"/>
         <StackPanel x:Name="GameOverMenu" Visibility="Hidden" HorizontalAlignment="Left" Height="469" Margin="355,50,0,0" VerticalAlignment="Top" Width="355" Background="White">

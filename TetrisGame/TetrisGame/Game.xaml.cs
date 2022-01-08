@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -144,8 +145,8 @@ namespace TetrisGame
                 statoGioco.MuoviInBasso();
                 DisegnaGioco(statoGioco);
             }
-            t.SetStop();
-            tempo.Abort();
+            t.SetStop(); //fermo il tempo
+            tempo.Abort(); //fermo il thread
             lblTotPunteggio.Content = "Punteggio: " + lblPunteggio.Content; //punteggio finale
             lblTotTempo.Content = "Tempo:" + lblTempo.Content; //tempo totale           
             GameOverMenu.Visibility = Visibility.Visible;
