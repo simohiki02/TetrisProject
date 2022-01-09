@@ -9,7 +9,7 @@
         Title="MainWindow" Height="514.8" Width="880.4">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="GraficaTetris/TetrisLogo.jpg"/>
+            <ImageBrush ImageSource="Grafica/TetrisLogo.jpg"/>
         </Grid.Background>
         <Label Content="TETRIS GAME" HorizontalAlignment="Center" Height="73" VerticalAlignment="Top" Width="342" FontFamily="Stencil" FontSize="50" BorderThickness="4" Margin="273,32,258.6,0" Foreground="White" Background="#FF0008B0">
             <Label.Effect>

@@ -9,7 +9,7 @@
     <Window.Background>
         <ImageBrush>
             <ImageBrush.ImageSource>
-                <BitmapImage UriSource="GraficaTetris/TetrisLogo.jpg"/>
+                <BitmapImage UriSource="Grafica/TetrisLogo.jpg"/>
             </ImageBrush.ImageSource>
         </ImageBrush>
     </Window.Background>

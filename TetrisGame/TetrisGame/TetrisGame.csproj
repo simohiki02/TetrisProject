@@ -61,13 +61,13 @@
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gioco.cs" />
-    <Compile Include="GraficaTetris\I.cs" />
-    <Compile Include="GraficaTetris\J.cs" />
-    <Compile Include="GraficaTetris\L.cs" />
-    <Compile Include="GraficaTetris\O.cs" />
-    <Compile Include="GraficaTetris\S.cs" />
-    <Compile Include="GraficaTetris\T.cs" />
-    <Compile Include="GraficaTetris\Z.cs" />
+    <Compile Include="ClassiBlocchi\I.cs" />
+    <Compile Include="ClassiBlocchi\J.cs" />
+    <Compile Include="ClassiBlocchi\L.cs" />
+    <Compile Include="ClassiBlocchi\O.cs" />
+    <Compile Include="ClassiBlocchi\S.cs" />
+    <Compile Include="ClassiBlocchi\T.cs" />
+    <Compile Include="ClassiBlocchi\Z.cs" />
     <Compile Include="Grid.cs" />
     <Compile Include="ListaBlocchi.cs" />
     <Compile Include="Server.cs" />
@@ -121,26 +121,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="GraficaTetris\TetrisLogo.jpg" />
+    <Resource Include="Grafica\TetrisLogo.jpg" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="GraficaTetris\GrafichePezzi\Block-Empty.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\Block-I.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\Block-J.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\Block-L.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\Block-Q.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\Block-S.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\Block-T.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\Block-Z.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\TileBlue.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\TileCyan.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\TileEmpty.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\TileGreen.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\TileOrange.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\TilePurple.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\TileRed.png" />
-    <Resource Include="GraficaTetris\GrafichePezzi\TileYellow.png" />
+    <Resource Include="Grafica\GraficheBlocchi\Block-Empty.png" />
+    <Resource Include="Grafica\GraficheBlocchi\Block-I.png" />
+    <Resource Include="Grafica\GraficheBlocchi\Block-J.png" />
+    <Resource Include="Grafica\GraficheBlocchi\Block-L.png" />
+    <Resource Include="Grafica\GraficheBlocchi\Block-Q.png" />
+    <Resource Include="Grafica\GraficheBlocchi\Block-S.png" />
+    <Resource Include="Grafica\GraficheBlocchi\Block-T.png" />
+    <Resource Include="Grafica\GraficheBlocchi\Block-Z.png" />
+    <Resource Include="Grafica\GrafichePezzi\TileBlue.png" />
+    <Resource Include="Grafica\GrafichePezzi\TileCyan.png" />
+    <Resource Include="Grafica\GrafichePezzi\TileEmpty.png" />
+    <Resource Include="Grafica\GrafichePezzi\TileGreen.png" />
+    <Resource Include="Grafica\GrafichePezzi\TileOrange.png" />
+    <Resource Include="Grafica\GrafichePezzi\TilePurple.png" />
+    <Resource Include="Grafica\GrafichePezzi\TileRed.png" />
+    <Resource Include="Grafica\GrafichePezzi\TileYellow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

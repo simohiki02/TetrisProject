@@ -61,27 +61,27 @@ namespace TetrisGame
         //creo vettore per i colori dei pezzi
         private ImageSource[] coloriBlocchi = new ImageSource[]
         {
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileEmpty.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileCyan.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileBlue.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileOrange.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileYellow.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileGreen.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TilePurple.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/TileRed.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GrafichePezzi/TileEmpty.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GrafichePezzi/TileCyan.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GrafichePezzi/TileBlue.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GrafichePezzi/TileOrange.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GrafichePezzi/TileYellow.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GrafichePezzi/TileGreen.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GrafichePezzi/TilePurple.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GrafichePezzi/TileRed.png", UriKind.Relative)),
         };
 
         //creo vettore con forme dei pezzi
         private ImageSource[] immaginiBlocchi = new ImageSource[]
         {
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-Empty.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-I.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-J.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-L.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-Q.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-S.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-T.png", UriKind.Relative)),
-            new BitmapImage(new Uri("GraficaTetris/GrafichePezzi/Block-Z.png", UriKind.Relative))
+            new BitmapImage(new Uri("Grafica/GraficheBlocchi/Block-Empty.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GraficheBlocchi/Block-I.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GraficheBlocchi/Block-J.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GraficheBlocchi/Block-L.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GraficheBlocchi/Block-Q.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GraficheBlocchi/Block-S.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GraficheBlocchi/Block-T.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/GraficheBlocchi/Block-Z.png", UriKind.Relative))
 
         };
         public Game(object dati)
@@ -91,6 +91,8 @@ namespace TetrisGame
             this.dati = dati as DatiCondivisi;
             controlloImmagini = SetupCanvas(statoGioco.CampoGioco);
             lblAvversario.Content = Pacchetto.nomeAvversario;
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"Soundtrack/TetrisSoundtrack.wav"); //vado a prendere nella cartella "canzoni" l'audio che ha per nome la risposta corretta   
+            player.PlayLooping(); //riproduco l'audio
         }
 
         //metodo che disegna la grid del gioco
@@ -115,7 +117,6 @@ namespace TetrisGame
             }
         }
 
-        public static int stato = 0, righe = 0;
         //metodo che avvia il gioco con una grid e i blocchi di partenza
         private void DisegnaGioco(Gioco statoGioco)
         {
@@ -132,7 +133,9 @@ namespace TetrisGame
             ImgProxBlocco.Source = immaginiBlocchi[proxBlocco.Id]; //applichiamo l'immagine dell'id corrispondente
         }
 
+        public static int stato = 0, righe = 0, malus = -1;
         private bool vinto = false;
+        private int delay = 500; //tempo che impiega il blocco per passare da una riga all'altra
         //metodo asincrono perchè vogliamo aspettare senza bloccare la UI
         private async Task GameLoop()
         {
@@ -140,7 +143,7 @@ namespace TetrisGame
             while (!statoGioco.GameOver)
             {
                 //l'operatore await ritorna il risultato del metodo in un secondo momento, dopo il completamento dell'operazione in corso
-                await Task.Delay(500);
+                await Task.Delay(delay);
                 statoGioco.MuoviInBasso();
                 DisegnaGioco(statoGioco);
 
@@ -152,12 +155,22 @@ namespace TetrisGame
                     vinto = true;
                     statoGioco.GameOver = true; //imposto lo stato gioco a "fine"
                 }
+
+                if(malus == 0) //caso di arrivo del primo malus (aumento velocità caduta blocchi)
+                {
+                    delay = 200; //imposto il delay a 200, maggiore velocità di caduta del pezzo
+                }
+
+                if(malus == 1) //nel caso di arrivo del secondo malus (riduzione attacco)
+                {
+                    //da implementare
+                }
             }
             if(vinto == false) //se ho perso io
             {
-                dati.AddDaInviare("g;1;0;-1"); //mando il pacchetto con stato a 1
-                lblTotPunteggio.Content = "Punteggio: " + lblPunteggio.Content; //punteggio finale   
+                dati.AddDaInviare("g;1;0;-1"); //mando il pacchetto con stato a 1  
             }
+            lblTotPunteggio.Content = "Punteggio: " + lblPunteggio.Content; //punteggio finale
             GameOverMenu.Visibility = Visibility.Visible; //visualizzo menu in tutti i casi con scritta iniziale diversa
         }
 

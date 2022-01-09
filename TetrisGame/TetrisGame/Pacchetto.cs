@@ -21,10 +21,14 @@ namespace TetrisGame
                 tipo = "g"; //pacchetto game
                 stato = int.Parse(dati[1]); //salvo lo stato del gioco
                 righe = int.Parse(dati[2]); //salvo le righe
-                malus = int.Parse(dati[3]); //salvo il malus 
+                malus = int.Parse(dati[3]); //salvo il malus
             }
             else
             {
+                tipo = "c";
+                stato = 0;
+                righe = 0;
+                malus = -1;
                 connessione = char.Parse(dati[0]); //stato connessione
                 nome = dati[1]; //nome 
             }
