@@ -41,7 +41,8 @@ namespace TetrisGame
                 }
                 else
                     dati.AddDaElaborare(p); //lo aggiungo alla lista da elaborare 
-            }  
+            } 
+            
         }
     }
 }

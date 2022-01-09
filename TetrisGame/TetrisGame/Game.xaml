@@ -32,7 +32,7 @@
             <Label x:Name="lblStato" Content="GAME OVER!" HorizontalAlignment="Left" Height="95" VerticalAlignment="Top" Width="487" Background="#FF0083FF" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="Risultati:" HorizontalAlignment="Left" Height="95" VerticalAlignment="Top" Width="487" Background="#FF0083FF" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label x:Name="lblTotPunteggio" Content="Punteggio:" HorizontalAlignment="Left" Height="92" Width="487" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Red"/>
-            <Button x:Name="BtnHome" Content="Torna al menù principale" HorizontalAlignment="Left" Height="110" Width="487" FontSize="30" FontFamily="Impact" Click="BtnHome_Click"/>
+            <Button x:Name="BtnClose" Content="Chiudi" HorizontalAlignment="Left" Height="110" Width="487" FontSize="40" FontFamily="Impact" Click="BtnClose_Click"/>
         </StackPanel>
     </Grid>
 </Window>

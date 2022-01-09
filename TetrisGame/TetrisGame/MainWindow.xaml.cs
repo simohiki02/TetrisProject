@@ -23,12 +23,13 @@ namespace TetrisGame
     public partial class MainWindow : Window
     {
         DatiCondivisi dati; //inizializzo i dati condivisi
+        Peer p;
         public MainWindow()
         {
             InitializeComponent();
             dati = new DatiCondivisi();
             dati.mw = this;
-            Peer p = new Peer(dati); //costruttore dei Thread
+            p = new Peer(dati); //costruttore dei Thread
             p.StartThread(); //start dei thread
         }
 
@@ -60,6 +61,10 @@ namespace TetrisGame
             Application.Current.Dispatcher.Invoke((Action)delegate {
                 Game game = new Game(dati);
                 game.ShowDialog(); //apro la finestra di gioco
+
+                /*quando la finestra Game si chiude*/
+                p.StopThread(); //fermo i Thread
+                Close(); //chiudo la finestra
             }); 
         }
 

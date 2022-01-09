@@ -69,6 +69,7 @@ namespace TetrisGame
             new BitmapImage(new Uri("Grafica/GrafichePezzi/TileGreen.png", UriKind.Relative)),
             new BitmapImage(new Uri("Grafica/GrafichePezzi/TilePurple.png", UriKind.Relative)),
             new BitmapImage(new Uri("Grafica/GrafichePezzi/TileRed.png", UriKind.Relative)),
+            new BitmapImage(new Uri("Grafica/x.jpg", UriKind.Relative)),
         };
 
         //creo vettore con forme dei pezzi
@@ -91,6 +92,8 @@ namespace TetrisGame
             this.dati = dati as DatiCondivisi;
             controlloImmagini = SetupCanvas(statoGioco.CampoGioco);
             lblAvversario.Content = Pacchetto.nomeAvversario;
+
+            //soundtrack
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"Soundtrack/TetrisSoundtrack.wav"); //vado a prendere nella cartella "canzoni" l'audio che ha per nome la risposta corretta   
             player.PlayLooping(); //riproduco l'audio
         }
@@ -120,7 +123,14 @@ namespace TetrisGame
         //metodo che avvia il gioco con una grid e i blocchi di partenza
         private void DisegnaGioco(Gioco statoGioco)
         {
-            DisegnaCampo(statoGioco.CampoGioco);
+            if(malus == 1 || okMalus2 == true)
+            {
+                okMalus2 = false; //questo perchè lo deve fare una sola volta
+                malus = -1; //""  ""   ""
+                DisegnaMalus(statoGioco.CampoGioco);
+            }
+            else
+                DisegnaCampo(statoGioco.CampoGioco);
             DisegnaBlocco(statoGioco.BloccoCorrenteProp);
             PreviewProxBlocco(statoGioco.ListaBlocchi);
             lblPunteggio.Content = statoGioco.Score; //aggiorno il punteggio nella textbox
@@ -134,7 +144,9 @@ namespace TetrisGame
         }
 
         public static int stato = 0, righe = 0, malus = -1;
+        private bool okMalus1 = false, okMalus2 = false;
         private bool vinto = false;
+        public static bool righeMalus = false;
         private int delay = 500; //tempo che impiega il blocco per passare da una riga all'altra
         //metodo asincrono perchè vogliamo aspettare senza bloccare la UI
         private async Task GameLoop()
@@ -147,7 +159,7 @@ namespace TetrisGame
                 statoGioco.MuoviInBasso();
                 DisegnaGioco(statoGioco);
 
-                lblPuntAvversario.Content = righe; //visualizzo le righe risolte dall'avversario
+                lblPuntAvversario.Content = righe + " righe"; //visualizzo le righe risolte dall'avversario
                 if (stato == 1) //l'avversario ha perso
                 {
                     //cambio la scritta allo stack panel
@@ -156,14 +168,10 @@ namespace TetrisGame
                     statoGioco.GameOver = true; //imposto lo stato gioco a "fine"
                 }
 
-                if(malus == 0) //caso di arrivo del primo malus (aumento velocità caduta blocchi)
+                if(malus == 0 || okMalus1 == true) //caso di arrivo del primo malus (aumento velocità caduta blocchi)
                 {
+                    okMalus1 = true; //in questo modo se lo stato del malus cambia, questo continua a funzionare
                     delay = 200; //imposto il delay a 200, maggiore velocità di caduta del pezzo
-                }
-
-                if(malus == 1) //nel caso di arrivo del secondo malus (riduzione attacco)
-                {
-                    //da implementare
                 }
             }
             if(vinto == false) //se ho perso io
@@ -172,6 +180,21 @@ namespace TetrisGame
             }
             lblTotPunteggio.Content = "Punteggio: " + lblPunteggio.Content; //punteggio finale
             GameOverMenu.Visibility = Visibility.Visible; //visualizzo menu in tutti i casi con scritta iniziale diversa
+            Pacchetto.connessione = 'c'; //chiudo la connessione
+        }
+
+        private void DisegnaMalus(Grid grid)
+        {
+            righeMalus = true; //servirà al metodo CheckRigheCompletate nella classe Grid
+            for (int r = 21; r >= 11; r--) //le prime dieci righe
+            {
+                for (int c = 0; c <= 9; c++) //tutte le colonne
+                {
+                    //le riempio
+                    grid[r, c] = 1;    //sarà sempre 0 perchè i valori delle celle non sono settati
+                    controlloImmagini[r, c].Source = coloriBlocchi[8];
+                }
+            }
         }
 
         //evento che rileva pressione tasti dell utente e muove il pezzo in tutte le direzioni
@@ -215,7 +238,7 @@ namespace TetrisGame
             await GameLoop();
         }
 
-        private void BtnHome_Click(object sender, RoutedEventArgs e)
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close(); //chiudo questa finestra
         }

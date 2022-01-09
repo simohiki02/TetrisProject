@@ -22,6 +22,8 @@ namespace TetrisGame
             {
                 if(dati.GetSizeDaElaborare() > 0) //se sono presenti pacchetti
                 {
+                    dati.GetDaElaborare(); //rimuovo il pacchetto dalla lista
+
                     /*Versione precedente: durante l'esecuzione del gioco quando arrivava
                      * un pacchetto non entrava nel ciclo quindi nel caso di pacchetti game
                      * calcolo i campi direttamente nella classe "Server", per quello delli della

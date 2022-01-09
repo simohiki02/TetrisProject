@@ -11,7 +11,7 @@ namespace TetrisGame
     {
         private int[,] campo;
 
-        public int righe { get; }
+        public int righe { get; set; }
         public int colonne { get; }
 
         //indicizzatore, grazie a questo posso accedere direttamente ai valori tramite l'instanza di un oggetto 
@@ -110,7 +110,9 @@ namespace TetrisGame
         public int CheckRigheCompletate()
         {
             int righeCompletate = 0; //contatore per le righe completate
-            for (int r = righe - 1; r >= 0; r--) //partiamo dall'ultima riga della grid
+            if (Game.righeMalus == true) //se è attivo il secondo malus, deve iniziare a calcolare dall'11 riga in su
+                righe = 12;
+            for (int r = righe - 1; r >= 0; r--) //partiamo dall'ultima riga della grid in caso in cui non c'è il malus
             {
                 if (RigaPiena(r) == true) //se la riga è piena
                 {

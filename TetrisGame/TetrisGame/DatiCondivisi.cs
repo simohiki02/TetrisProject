@@ -9,7 +9,9 @@ namespace TetrisGame
     class DatiCondivisi
     {
         private List<Pacchetto> DaElaborare; //lista pacchetti da elaborare
-        private List<string> DaInviare; //lista pacchetti da inviare
+
+        //lista pacchetti da inviare
+        private List<string> DaInviare; //lista di stringhe in quanto sarà sempre e solo una stringa csv da inviare
         public MainWindow mw;
 
         public DatiCondivisi()
@@ -23,11 +25,11 @@ namespace TetrisGame
             DaElaborare.Add(p);
         }
 
-        public Pacchetto GetDaElaborare() //prendo il pacchetto da elaborare
+        public void GetDaElaborare() //prendo il pacchetto da elaborare
         {
-            Pacchetto p = DaElaborare[DaElaborare.Count - 1]; //prendo l'ultimo pacchetto
+            //Pacchetto p = DaElaborare[DaElaborare.Count - 1]; //prendo l'ultimo pacchetto
             DaElaborare.RemoveAt(DaElaborare.Count - 1); //lo rimuovo dalla lista
-            return p;
+            return;
         }
 
         public int GetSizeDaElaborare() //mi restituisce il n degli elementi della lista

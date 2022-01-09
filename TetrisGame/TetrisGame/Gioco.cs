@@ -62,9 +62,9 @@ namespace TetrisGame
             Score += CampoGioco.CheckRigheCompletate(); //il punteggio equivale al numero di righe completate
             if(Score != punteggio) //se non completo altre righe è inutile mandare pacchetti
             {
-                if (Score == 3) //se completo tre righe mando il primo malus
+                if (Score == 2) //se completo tre righe mando il primo malus
                     p = "g;0;" + Score + ";0";
-                else if (Score == 5) //se ne completo 5 mando il secondo malus
+                else if (Score == 3) //se ne completo 5 mando il secondo malus
                     p = "g;0;" + Score + ";1";
                 else //prima delle tre righe completate
                     p = "g;0;" + Score + ";-1";
