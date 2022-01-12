@@ -1,10 +1,10 @@
 PACCHETTI UDP
 
 [Pacchetto game]
-mittente;destinatario;stato gioco;righe risolte/da mandare;malus
+carattere gioco;stato gioco;righe risolte/da mandare;malus
 
 [Pacchetto connessione]
-mittente;destinatario;tipo di connessione
+nome;tipo di connessione
 
 PEER
 
