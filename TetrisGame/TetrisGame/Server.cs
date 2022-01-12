@@ -55,7 +55,7 @@ namespace TetrisGame
                         dati.AddDaElaborare(p); //lo aggiungo alla lista da elaborare 
                 } 
             }
-            Console.WriteLine("Thread Server chiuso");
+            Console.WriteLine("Thread Server terminato");
         }
     }
 }

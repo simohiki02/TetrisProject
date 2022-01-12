@@ -92,6 +92,7 @@ namespace TetrisGame
             this.dati = dati as DatiCondivisi;
             controlloImmagini = SetupCanvas(statoGioco.CampoGioco);
             lblAvversario.Content = Pacchetto.nomeAvversario;
+            lblUtente.Content = Pacchetto.nome;
 
             //soundtrack
             //System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"Soundtrack/TetrisSoundtrack.wav"); //vado a prendere nella cartella "canzoni" l'audio che ha per nome la risposta corretta   
@@ -191,7 +192,7 @@ namespace TetrisGame
                 for (int c = 0; c <= 9; c++) //tutte le colonne
                 {
                     //le riempio
-                    grid[r, c] = 8; //assegno un id casuale
+                    grid[r, c] = 8; //assegno l'id dell'immagine del malus
                     int id = grid[r, c];
                     controlloImmagini[r, c].Source = coloriBlocchi[id];
                 }
@@ -239,9 +240,21 @@ namespace TetrisGame
             await GameLoop();
         }
 
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        private void BtnTermina_Click(object sender, RoutedEventArgs e)
         {
             this.Close(); //chiudo questa finestra
+        }
+
+        private void BtnCloseMenu_Click(object sender, RoutedEventArgs e)
+        {
+            GameOverMenu.Visibility = Visibility.Hidden;
+            BtnOpenMenu.Visibility = Visibility.Visible;
+        }
+
+        private void BtnOpenMenu_Click(object sender, RoutedEventArgs e)
+        {
+            GameOverMenu.Visibility = Visibility.Visible;
+            BtnOpenMenu.Visibility = Visibility.Hidden;
         }
     }
 }

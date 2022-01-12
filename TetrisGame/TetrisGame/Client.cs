@@ -29,7 +29,7 @@ namespace TetrisGame
                     client.Send(data, data.Length, address, 12345); //invio
                 }
             }
-            Console.WriteLine("Thread client chiuso");
+            Console.WriteLine("Thread client terminato");
         }
     }
 }

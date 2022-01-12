@@ -40,6 +40,7 @@ namespace TetrisGame
             if(risposta == MessageBoxResult.Yes) //accetto la richiesta
             {
                 string name = Interaction.InputBox("Inserisci il tuo nome");
+                Pacchetto.nome = name; //salvo il mio nome
                 string pacchetto = "y;" + name; 
                 dati.AddDaInviare(pacchetto); //lo aggiungo alla lista dei pacchetti da inviare
                 StartGame();

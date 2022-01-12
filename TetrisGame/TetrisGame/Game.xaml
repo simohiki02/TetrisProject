@@ -22,17 +22,19 @@
         <Canvas x:Name="CanvasGioco" Background="#101010" Width="250" Height="510" ClipToBounds="True" Loaded="CanvasGioco_LoadedAsync" Margin="409,33,237.5,33.8"/>
         <TextBox HorizontalAlignment="Left" Height="101" Margin="747,146,0,0" TextWrapping="Wrap" Text="Prossimo blocco:" VerticalAlignment="Top" Width="203" Background="White" FontSize="40" FontFamily="Impact" TextAlignment="Center" Grid.ColumnSpan="2"/>
         <Image x:Name="ImgProxBlocco" HorizontalAlignment="Left" Height="179" Margin="747,247,0,0" VerticalAlignment="Top" Width="203" Stretch="Fill" Grid.ColumnSpan="2"/>
-        <Label Content="Stai giocando contro:" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,36,0,0" HorizontalContentAlignment="Center"/>
-        <Label x:Name="lblAvversario" Content="" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,94,0,0" HorizontalContentAlignment="Center"/>
+        <Label Content="stai giocando contro:" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,137,0,0" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lblAvversario" Content="" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,195,0,0" HorizontalContentAlignment="Center" Foreground="#FF003AFF"/>
         <Label Content="Punteggio:" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="197" Background="White" FontSize="40" FontFamily="Impact" Margin="682,57,0,0"/>
-        <Label x:Name="lblPunteggio" Content="" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="191" Background="White" FontSize="40" FontFamily="Impact" Margin="876,57,0,0" Grid.ColumnSpan="2"/>
-        <Label Content="che ha risolto:" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,151,0,0" HorizontalContentAlignment="Center"/>
-        <Label x:Name="lblPuntAvversario" Content="" HorizontalAlignment="Left" Height="66" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,204,0,0" HorizontalContentAlignment="Center"/>
-        <StackPanel x:Name="GameOverMenu" Visibility="Hidden" HorizontalAlignment="Left" Height="391" Margin="281,90,0,0" VerticalAlignment="Top" Width="487" Background="White">
+        <Label x:Name="lblPunteggio" Content="" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="191" Background="White" FontSize="40" FontFamily="Impact" Margin="876,57,0,0" Grid.ColumnSpan="2" Foreground="Red"/>
+        <Label Content="che ha risolto:" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,252,0,0" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lblPuntAvversario" Content="" HorizontalAlignment="Left" Height="66" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,305,0,0" HorizontalContentAlignment="Center" Foreground="#FF003AFF"/>
+        <Label x:Name="lblUtente" Content="" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,79,0,0" HorizontalContentAlignment="Center" Foreground="Red"/>
+        <StackPanel x:Name="GameOverMenu" Visibility="Hidden" HorizontalAlignment="Left" Height="398" Margin="281,90,0,0" VerticalAlignment="Top" Width="487" Background="White">
             <Label x:Name="lblStato" Content="GAME OVER!" HorizontalAlignment="Left" Height="95" VerticalAlignment="Top" Width="487" Background="#FF0083FF" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label Content="Risultati:" HorizontalAlignment="Left" Height="95" VerticalAlignment="Top" Width="487" Background="#FF0083FF" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label x:Name="lblTotPunteggio" Content="Punteggio:" HorizontalAlignment="Left" Height="92" Width="487" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Red"/>
-            <Button x:Name="BtnClose" Content="Chiudi" HorizontalAlignment="Left" Height="110" Width="487" FontSize="40" FontFamily="Impact" Click="BtnClose_Click"/>
+            <Button x:Name="BtnTermina" Content="Termina la partita" HorizontalAlignment="Left" Height="108" Width="487" FontSize="40" FontFamily="Impact" Click="BtnTermina_Click" Background="#FFA8FF11"/>
+            <Button x:Name="BtnCloseMenu" Content="Chiudi menù" HorizontalAlignment="Left" Height="104" Width="487" FontSize="40" FontFamily="Impact" Click="BtnCloseMenu_Click" Background="#FFC623DA"/>
         </StackPanel>
+        <Button x:Name="BtnOpenMenu" Content="Apri menù" Visibility="Hidden" HorizontalAlignment="Left" Width="276" FontSize="40" FontFamily="Impact" Click="BtnOpenMenu_Click" Background="#FFFF0077" Margin="10,474,0,33.8"/>
     </Grid>
 </Window>

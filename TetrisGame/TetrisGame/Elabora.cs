@@ -29,15 +29,15 @@ namespace TetrisGame
                      * calcolo i campi direttamente nella classe "Server", per quello delli della
                      * connessione li calcolo qui
 
-                    //Pacchetto p = dati.GetDaElaborare(); //prendo il pacchetto
-                    //if (p.tipo == "g") //pacchetto game
-                    //{
-                    //    //variabili statiche della classe Game
-                    //    //Game.righe = p.righe; //righe avversario
-                    //    //Game.stato = p.stato; //stato gioco 
-                    //}
-                    //else //pacchetto connessione
-                    //{ 
+                    Pacchetto p = dati.GetDaElaborare(); //prendo il pacchetto
+                    if (p.tipo == "g") //pacchetto game
+                    {
+                        //variabili statiche della classe Game
+                        //Game.righe = p.righe; //righe avversario
+                        //Game.stato = p.stato; //stato gioco 
+                    }
+                    else //pacchetto connessione
+                    { 
                     
                      */
 
@@ -59,7 +59,7 @@ namespace TetrisGame
                     }
                 }
             }
-            Console.WriteLine("chiusa elabora");
+            Console.WriteLine("Thread Elabora terminato");
         }
     }
 }

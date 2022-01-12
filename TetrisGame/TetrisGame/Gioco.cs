@@ -14,8 +14,11 @@ namespace TetrisGame
         public Grid CampoGioco { get; }
         public ListaBlocchi ListaBlocchi { get; }
         public bool GameOver { get; set; } 
-        public int Score { get; set; } 
+        public int Score { get; set; }
 
+        bool okMalus1 = false, okMalus2 = false; //servono nel caso in cui l'utente superi il punteggio necessario per l'invio del malus e quindi devono essere mandati solo una volta
+
+        string p = ""; //pacchetto da inviare
         public Blocco BloccoCorrenteProp
         {
             get => bloccoCorrente;
@@ -58,16 +61,26 @@ namespace TetrisGame
             //controlliamo se ci sono righe completate
             //e le aggiungiamo al punteggio che poi verrà visualizzato nella grafica
             //tramite la classe "Game"
-            string p = "";
             Score += CampoGioco.CheckRigheCompletate(); //il punteggio equivale al numero di righe completate
             if(Score != punteggio) //se non completo altre righe è inutile mandare pacchetti
             {
-                if (Score == 2) //se completo tre righe mando il primo malus
+                //se completo 2 righe o le supero e non ho ancora raggiunto il malus successivo, mando il primo malus
+                if (Score >= 2 && okMalus1 == false) 
+                {
                     p = "g;0;" + Score + ";0";
-                else if (Score == 3) //se ne completo 5 mando il secondo malus
+                    okMalus1 = true;
+                }
+                    
+                //se ne completo 3 mando il secondo malus
+                //è inutile sviluppare il caso in cui l'utente ne completi direttamente 3
+                //perchè i malus in termini di punteggio saranno distanziati di molto
+                else if (Score >= 3 && okMalus2 == false)
+                {
                     p = "g;0;" + Score + ";1";
-                else //prima delle tre righe completate
-                    p = "g;0;" + Score + ";-1";
+                    okMalus2 = true;
+                }
+                else //se non c'è nessun malus invio semplicemente il punteggio 
+                    p = "g;0;" + Score + ";-1"; //invio semplicemente il mio punteggio
                 punteggio = Score;
                 dati.AddDaInviare(p);
             }
