@@ -34,12 +34,5 @@ namespace TetrisGame
             threadElabora = new Thread(new ThreadStart(elabora.Esamina));
             threadElabora.Start();
         }
-
-        public void StopThread() //fermo i thread
-        {
-            threadClient.Abort();
-            threadServer.Abort();
-            threadElabora.Abort();
-        }
     }
 }

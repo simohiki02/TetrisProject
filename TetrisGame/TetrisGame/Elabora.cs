@@ -18,7 +18,7 @@ namespace TetrisGame
 
         public void Esamina()
         {
-            while(Pacchetto.connessione != 'c')
+            while(Pacchetto.Connessione != 'c')
             {
                 if(dati.GetSizeDaElaborare() > 0) //se sono presenti pacchetti
                 {
@@ -41,7 +41,7 @@ namespace TetrisGame
                     
                      */
 
-                    char connection = Pacchetto.connessione; //controllo lo stato della connessione
+                    char connection = Pacchetto.Connessione; //controllo lo stato della connessione
                     switch (connection)
                     {
                         case 'a': //richiesta di connessione
@@ -59,6 +59,7 @@ namespace TetrisGame
                     }
                 }
             }
+            Console.WriteLine("chiusa elabora");
         }
     }
 }

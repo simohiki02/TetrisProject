@@ -111,7 +111,7 @@ namespace TetrisGame
         {
             int righeCompletate = 0; //contatore per le righe completate
             if (Game.righeMalus == true) //se è attivo il secondo malus, deve iniziare a calcolare dall'11 riga in su
-                righe = 12;
+                righe = 11;
             for (int r = righe - 1; r >= 0; r--) //partiamo dall'ultima riga della grid in caso in cui non c'è il malus
             {
                 if (RigaPiena(r) == true) //se la riga è piena

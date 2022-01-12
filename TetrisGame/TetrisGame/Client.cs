@@ -20,7 +20,7 @@ namespace TetrisGame
 
         public void Invia()
         {
-            while(Pacchetto.connessione != 'c')
+            while(Pacchetto.Connessione != 'c')
             {
                 if(dati.GetSizeDaInviare() > 0)
                 {
@@ -29,6 +29,7 @@ namespace TetrisGame
                     client.Send(data, data.Length, address, 12345); //invio
                 }
             }
+            Console.WriteLine("Thread client chiuso");
         }
     }
 }

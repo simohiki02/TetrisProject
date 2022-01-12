@@ -94,8 +94,8 @@ namespace TetrisGame
             lblAvversario.Content = Pacchetto.nomeAvversario;
 
             //soundtrack
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"Soundtrack/TetrisSoundtrack.wav"); //vado a prendere nella cartella "canzoni" l'audio che ha per nome la risposta corretta   
-            player.PlayLooping(); //riproduco l'audio
+            //System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"Soundtrack/TetrisSoundtrack.wav"); //vado a prendere nella cartella "canzoni" l'audio che ha per nome la risposta corretta   
+            //player.PlayLooping(); //riproduco l'audio
         }
 
         //metodo che disegna la grid del gioco
@@ -180,7 +180,7 @@ namespace TetrisGame
             }
             lblTotPunteggio.Content = "Punteggio: " + lblPunteggio.Content; //punteggio finale
             GameOverMenu.Visibility = Visibility.Visible; //visualizzo menu in tutti i casi con scritta iniziale diversa
-            Pacchetto.connessione = 'c'; //chiudo la connessione
+            Pacchetto.Connessione = 'c'; //chiudo la connessione
         }
 
         private void DisegnaMalus(Grid grid)
@@ -191,8 +191,9 @@ namespace TetrisGame
                 for (int c = 0; c <= 9; c++) //tutte le colonne
                 {
                     //le riempio
-                    grid[r, c] = 1;    //sarà sempre 0 perchè i valori delle celle non sono settati
-                    controlloImmagini[r, c].Source = coloriBlocchi[8];
+                    grid[r, c] = 8; //assegno un id casuale
+                    int id = grid[r, c];
+                    controlloImmagini[r, c].Source = coloriBlocchi[id];
                 }
             }
         }

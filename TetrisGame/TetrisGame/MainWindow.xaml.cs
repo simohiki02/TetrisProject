@@ -63,7 +63,7 @@ namespace TetrisGame
                 game.ShowDialog(); //apro la finestra di gioco
 
                 /*quando la finestra Game si chiude*/
-                p.StopThread(); //fermo i Thread
+                Pacchetto.Connessione = 'c'; //fermo i thread
                 Close(); //chiudo la finestra
             }); 
         }
@@ -74,6 +74,12 @@ namespace TetrisGame
             string ip = TxtIpDest.Text; //ip del destinatario
             Client.address = ip; //salvo l'indirizzo del destinatario
             dati.AddDaInviare("a;" + nome); //salvo nella lista il pacchetto da inviare
+        }
+
+        //in caso chiudesse la finestra dalla x
+        private void CloseFromX(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Pacchetto.Connessione = 'c'; //fermo i thread
         }
     }
 }

@@ -11,8 +11,10 @@ namespace TetrisGame
         public int stato, righe, malus; //stato del gioco, righe risolte, malus
         public static string nome, nomeAvversario; //nome utente o avversario
         public string tipo; //tipo di pacchetto (connessione,game)
-        public static char connessione; //stato connessione
-        
+        public static char Connessione { get { lock (sinConn) { return connessione; } } set { lock (sinConn) { connessione = value; } } } //stato connessione
+        private static char connessione;
+
+        private static object sinConn = new Object();
         public Pacchetto(string csv) //arriva un pacchetto, splitto i dati
         {
             string[] dati = csv.Split(';'); //splitto i dati
