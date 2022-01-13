@@ -167,7 +167,7 @@ namespace TetrisGame
             }
             if(vinto == false) //se ho perso io
             {
-                dati.AddDaInviare("g;1;0;-1"); //mando il pacchetto con stato a 1  
+                dati.AddDaInviare("g;1;" + statoGioco.Score + ";-1"); //mando il pacchetto con stato a 1 e punteggio
             }
             lblTotPunteggio.Content += lblPunteggio.Content.ToString(); //punteggio finale mio
             lblTotPunteggioAvv.Content += lblPuntAvversario.Content.ToString().Substring(0, lblPuntAvversario.Content.ToString().IndexOf('r')); //punteggio finale avversario
