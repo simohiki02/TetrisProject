@@ -39,7 +39,7 @@ namespace TetrisGame
                     dataReceived = client.Receive(ref riceveEP);
                     m = true;
                 }
-                catch (Exception ex) { m = false; }
+                catch (Exception) { m = false; }
                 if (m == true)
                 {
                     Client.address = riceveEP.Address.ToString(); //salvo l'indirizzo IP del destinatario

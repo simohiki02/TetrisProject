@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace TetrisGame
 {
@@ -164,7 +154,7 @@ namespace TetrisGame
                 if (stato == 1) //l'avversario ha perso
                 {
                     //cambio la scritta allo stack panel
-                    lblStato.Content = "Hai vinto!";
+                    lblStato.Content = "HAI VINTO!";
                     vinto = true;
                     statoGioco.GameOver = true; //imposto lo stato gioco a "fine"
                 }
@@ -179,7 +169,8 @@ namespace TetrisGame
             {
                 dati.AddDaInviare("g;1;0;-1"); //mando il pacchetto con stato a 1  
             }
-            lblTotPunteggio.Content = "Punteggio: " + lblPunteggio.Content; //punteggio finale
+            lblTotPunteggio.Content += lblPunteggio.Content.ToString(); //punteggio finale mio
+            lblTotPunteggioAvv.Content += lblPuntAvversario.Content.ToString().Substring(0, lblPuntAvversario.Content.ToString().IndexOf('r')); //punteggio finale avversario
             GameOverMenu.Visibility = Visibility.Visible; //visualizzo menu in tutti i casi con scritta iniziale diversa
             Pacchetto.Connessione = 'c'; //chiudo la connessione
         }

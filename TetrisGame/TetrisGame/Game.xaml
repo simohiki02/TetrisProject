@@ -29,9 +29,10 @@
         <Label Content="che ha risolto:" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,252,0,0" HorizontalContentAlignment="Center"/>
         <Label x:Name="lblPuntAvversario" Content="" HorizontalAlignment="Left" Height="66" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,305,0,0" HorizontalContentAlignment="Center" Foreground="#FF003AFF"/>
         <Label x:Name="lblUtente" Content="" HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="404" Background="White" FontSize="40" FontFamily="Impact" Margin="0,79,0,0" HorizontalContentAlignment="Center" Foreground="Red"/>
-        <StackPanel x:Name="GameOverMenu" Visibility="Hidden" HorizontalAlignment="Left" Height="398" Margin="281,90,0,0" VerticalAlignment="Top" Width="487" Background="White">
-            <Label x:Name="lblStato" Content="GAME OVER!" HorizontalAlignment="Left" Height="95" VerticalAlignment="Top" Width="487" Background="#FF0083FF" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <StackPanel x:Name="GameOverMenu" Visibility="Hidden" HorizontalAlignment="Left" Height="490" Margin="281,40,0,0" VerticalAlignment="Top" Width="487" Background="White">
+            <Label x:Name="lblStato" Content="HAI PERSO!" HorizontalAlignment="Left" Height="95" VerticalAlignment="Top" Width="487" Background="#FF0083FF" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label x:Name="lblTotPunteggio" Content="Punteggio:" HorizontalAlignment="Left" Height="92" Width="487" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Red"/>
+            <Label x:Name="lblTotPunteggioAvv" Content="Punteggio avversario:" HorizontalAlignment="Left" Height="92" Width="487" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Green"/>
             <Button x:Name="BtnTermina" Content="Termina la partita" HorizontalAlignment="Left" Height="108" Width="487" FontSize="40" FontFamily="Impact" Click="BtnTermina_Click" Background="#FFA8FF11"/>
             <Button x:Name="BtnCloseMenu" Content="Chiudi menù" HorizontalAlignment="Left" Height="104" Width="487" FontSize="40" FontFamily="Impact" Click="BtnCloseMenu_Click" Background="#FFC623DA"/>
         </StackPanel>
