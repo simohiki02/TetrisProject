@@ -1,2 +1,2 @@
 # TetrisProject
-Vazoler-Pepe
+Gioco tetris in C#
